@@ -1,0 +1,13 @@
+facility_id,facility_name,facility_type,city,state,is_aco_participant
+1,Juniper Valley Medical Center,Hospital,Juniper Valley,CO,TRUE
+2,Cedar Ridge Hospital,Hospital,Cedar Ridge,CO,TRUE
+3,Riverbend Community Hospital,Hospital,Riverbend,CO,FALSE
+4,Granite Falls Hospital,Hospital,Granite Falls,CO,FALSE
+5,Willow Creek Hospital,Hospital,Willow Creek,CO,TRUE
+6,Sagebrush Regional Hospital,Hospital,Sagebrush,CO,FALSE
+7,Juniper Valley Women's and Children's Hospital,Specialty Hospital,Juniper Valley,CO,FALSE
+8,Summit Orthopedic Hospital,Specialty Hospital,Cedar Ridge,CO,TRUE
+9,Northgate Family Clinic,Clinic,Juniper Valley,CO,TRUE
+10,Lakeside Clinic,Clinic,Riverbend,CO,FALSE
+11,Mesa Primary Care,Clinic,Granite Falls,CO,FALSE
+12,Pinehurst Clinic,Clinic,Willow Creek,CO,FALSE

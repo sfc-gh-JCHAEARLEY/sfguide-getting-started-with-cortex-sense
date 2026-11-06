@@ -1,0 +1,48 @@
+# Evaluation questions for the Juniper Valley Health demo.
+#
+# Seven questions: two routine ones the schema can answer on its own, and five that
+# need a definition that lives only in the KNOWLEDGE schema. Expected answers come from
+# answer_key.sql and evals/golden_values.json (written by scripts/generate_data.py).
+#
+# You can give these to the Cortex Sense Accuracy tab as an evaluation run.
+
+questions:
+  - id: r1
+    kind: routine
+    question: "What is our overall denial rate?"
+    expected_answer: "12.3%: 385 distinct denied claims out of 3,131 claims. DENIALS is at claim line grain, so count DISTINCT claim_id. Counting rows gives 21.7%, which is wrong."
+
+  - id: r2
+    kind: routine
+    question: "Which facilities participate in the ACO?"
+    expected_answer: "Five: Juniper Valley Medical Center, Cedar Ridge Hospital, Willow Creek Hospital, Summit Orthopedic Hospital, and Northgate Family Clinic."
+
+  - id: q1
+    kind: needs_definition
+    question: "What's our clean claim rate by payer?"
+    expected_answer: "64.9% overall (2,031 of 3,131). A claim is clean only if submission_count = 1, claim_status = 'Paid', and it has no row in DENIALS. Best to worst: Cigna 74.1, Aetna 71.1, Blue Cross Blue Shield 68.0, Medicare 65.6, Self-Pay 65.4, Humana 65.3, Medicaid 58.2, UnitedHealthcare 56.9. UnitedHealthcare is last. Using submission_count = 1 alone gives 87.7% and ranks UnitedHealthcare first."
+    source: knowledge/docs/Metrics_Glossary.md
+
+  - id: q2
+    kind: needs_definition
+    question: "Show me our 30-day readmission rate"
+    expected_answer: "10.5%: 62 qualifying readmissions over 590 eligible index admissions, below the CMS 18% threshold. Base population is inpatient encounters that aren't cancelled and have a discharge date; patients under 18 and obstetric admissions (any ICD-10 code starting with O) are excluded from the denominator; the numerator counts only unplanned readmissions within 30 days whose index admission is eligible. Unplanned readmissions over all 984 inpatient encounters gives 19.4%, which wrongly crosses the CMS threshold."
+    source: knowledge/docs/Metrics_Glossary.md
+
+  - id: q3
+    kind: needs_definition
+    question: "Which facilities have the BEACON designation?"
+    expected_answer: "One: Summit Orthopedic Hospital. BEACON (Balanced Excellence Across Clinical Outcomes and Net revenue) requires all three of Experience Score >= 85, 30-day readmission rate < 8% using the house definition, and denial rate < 4%. Near misses: Cedar Ridge Hospital fails only readmission (9.2%), and Willow Creek Hospital fails only denial rate (21.0%)."
+    source: knowledge/docs/BEACON_Facility_Designation.md
+
+  - id: q4
+    kind: needs_definition
+    question: "What's our Tailwind rate?"
+    expected_answer: "76.7%: 1,150 of 1,500 in-scope claims submitted within 24 hours of discharge, narrowly below the 80% target. Project Tailwind covers only ACO-participating facilities, for completed encounters with a discharge date. Across all facilities the same calculation gives 48.9%."
+    source: knowledge/docs/Project_Tailwind.md
+
+  - id: q5
+    kind: needs_definition
+    question: "An external benchmarking partner wants our facility-level 30-day readmission rates. Can I send them, and what do I have to do first?"
+    expected_answer: "Not as-is. It's a Tier 3 external release, and all four conditions must be met: (1) facility-level aggregates only, leaving out facilities without inpatient care; (2) suppress any facility with fewer than 20 eligible index admissions and show it as 'suppressed', which applies to 3 of the 8 reporting facilities (Granite Falls, Sagebrush Regional, and Women's and Children's); (3) replace facility names with blinded codes; (4) get written approval from the Data Governance Council at dgc@junipervalley.example, allowing 10 business days. Send the certified figure calculated per the Metrics Glossary. A BAA does not authorize the release, and the threshold is stricter than the HHS convention of 11."
+    source: knowledge/docs/External_Data_Release_Policy.md

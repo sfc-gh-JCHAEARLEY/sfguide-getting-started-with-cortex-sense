@@ -1,0 +1,680 @@
+denial_id,claim_id,line_number,carc_code,denial_reason,denial_date,appeal_status
+1,2,1,CO-18,Duplicate claim,2024-10-22,Overturned
+2,4,1,CO-29,Timely filing limit exceeded,2024-03-11,Overturned
+3,4,2,CO-97,Bundled service,2024-03-18,Overturned
+4,4,3,CO-18,Duplicate claim,2024-03-09,Overturned
+5,8,1,PR-1,Deductible amount,2025-01-06,Overturned
+6,14,1,CO-50,Not medically necessary,2025-03-14,Overturned
+7,19,1,PR-1,Deductible amount,2025-09-11,Overturned
+8,23,1,CO-50,Not medically necessary,2025-11-21,Upheld
+9,39,1,CO-97,Bundled service,2025-01-21,Overturned
+10,39,2,CO-29,Timely filing limit exceeded,2025-01-15,Overturned
+11,43,1,CO-29,Timely filing limit exceeded,2024-10-15,Upheld
+12,43,2,CO-29,Timely filing limit exceeded,2024-09-28,Not Appealed
+13,43,3,CO-4,Modifier inconsistent with procedure,2024-09-27,Upheld
+14,59,1,CO-97,Bundled service,2024-11-07,Upheld
+15,59,2,CO-16,Missing or invalid information,2024-11-20,Upheld
+16,61,1,CO-29,Timely filing limit exceeded,2024-10-19,Upheld
+17,61,2,CO-29,Timely filing limit exceeded,2024-11-02,Not Appealed
+18,61,3,CO-97,Bundled service,2024-10-21,Upheld
+19,62,1,CO-16,Missing or invalid information,2025-05-10,Not Appealed
+20,62,2,CO-50,Not medically necessary,2025-05-18,Upheld
+21,62,3,CO-16,Missing or invalid information,2025-05-04,Not Appealed
+22,74,1,CO-16,Missing or invalid information,2025-10-15,Not Appealed
+23,81,1,PR-1,Deductible amount,2024-10-09,Overturned
+24,81,2,CO-4,Modifier inconsistent with procedure,2024-10-17,Overturned
+25,81,3,CO-29,Timely filing limit exceeded,2024-10-10,Overturned
+26,82,1,CO-97,Bundled service,2025-02-18,Upheld
+27,85,1,CO-18,Duplicate claim,2024-10-01,Upheld
+28,90,1,CO-16,Missing or invalid information,2026-01-04,Not Appealed
+29,96,1,CO-4,Modifier inconsistent with procedure,2024-06-23,Overturned
+30,96,2,CO-29,Timely filing limit exceeded,2024-07-05,Overturned
+31,96,3,CO-16,Missing or invalid information,2024-06-26,Overturned
+32,100,1,CO-29,Timely filing limit exceeded,2025-02-23,Not Appealed
+33,100,2,PR-1,Deductible amount,2025-02-02,Upheld
+34,100,3,CO-50,Not medically necessary,2025-02-01,Upheld
+35,110,1,CO-50,Not medically necessary,2024-12-13,Not Appealed
+36,110,2,PR-1,Deductible amount,2024-12-14,Upheld
+37,114,1,CO-50,Not medically necessary,2024-07-04,Not Appealed
+38,114,2,CO-97,Bundled service,2024-07-10,Upheld
+39,114,3,CO-97,Bundled service,2024-06-27,Upheld
+40,117,1,CO-97,Bundled service,2025-06-22,Overturned
+41,117,2,PR-1,Deductible amount,2025-06-08,Overturned
+42,130,1,CO-18,Duplicate claim,2024-07-20,Overturned
+43,138,1,CO-29,Timely filing limit exceeded,2024-12-11,Not Appealed
+44,140,1,CO-18,Duplicate claim,2025-02-06,Overturned
+45,140,2,CO-97,Bundled service,2025-02-20,Overturned
+46,152,1,CO-97,Bundled service,2024-03-23,Overturned
+47,158,1,CO-97,Bundled service,2025-03-27,Not Appealed
+48,160,1,CO-16,Missing or invalid information,2025-12-29,Overturned
+49,162,1,CO-16,Missing or invalid information,2025-04-07,Upheld
+50,166,1,CO-97,Bundled service,2024-08-12,Overturned
+51,168,1,CO-50,Not medically necessary,2024-12-31,Overturned
+52,168,2,CO-4,Modifier inconsistent with procedure,2025-01-01,Overturned
+53,171,1,CO-4,Modifier inconsistent with procedure,2025-11-29,Overturned
+54,171,2,CO-4,Modifier inconsistent with procedure,2025-11-30,Overturned
+55,184,1,CO-16,Missing or invalid information,2024-07-12,Overturned
+56,184,2,CO-18,Duplicate claim,2024-07-30,Overturned
+57,190,1,CO-18,Duplicate claim,2024-03-12,Overturned
+58,194,1,CO-29,Timely filing limit exceeded,2025-08-19,Overturned
+59,194,2,PR-1,Deductible amount,2025-08-28,Overturned
+60,198,1,CO-4,Modifier inconsistent with procedure,2024-04-01,Overturned
+61,295,1,CO-16,Missing or invalid information,2025-04-04,Overturned
+62,295,2,CO-50,Not medically necessary,2025-04-16,Overturned
+63,295,3,CO-16,Missing or invalid information,2025-03-28,Overturned
+64,300,1,CO-29,Timely filing limit exceeded,2024-07-09,Upheld
+65,300,2,CO-97,Bundled service,2024-07-13,Upheld
+66,371,1,CO-16,Missing or invalid information,2025-08-14,Overturned
+67,371,2,CO-97,Bundled service,2025-08-10,Overturned
+68,371,3,CO-16,Missing or invalid information,2025-08-25,Overturned
+69,388,1,CO-50,Not medically necessary,2024-07-15,Upheld
+70,392,1,CO-29,Timely filing limit exceeded,2024-12-03,Overturned
+71,392,2,CO-50,Not medically necessary,2024-11-28,Overturned
+72,411,1,CO-4,Modifier inconsistent with procedure,2024-10-31,Not Appealed
+73,412,1,CO-97,Bundled service,2024-12-23,Overturned
+74,412,2,CO-29,Timely filing limit exceeded,2024-12-31,Overturned
+75,412,3,CO-50,Not medically necessary,2024-12-15,Overturned
+76,413,1,CO-4,Modifier inconsistent with procedure,2024-04-28,Not Appealed
+77,413,2,PR-1,Deductible amount,2024-05-01,Not Appealed
+78,414,1,CO-18,Duplicate claim,2025-11-06,Overturned
+79,414,2,CO-97,Bundled service,2025-11-10,Overturned
+80,434,1,CO-16,Missing or invalid information,2025-09-09,Overturned
+81,434,2,CO-18,Duplicate claim,2025-09-11,Overturned
+82,452,1,PR-1,Deductible amount,2025-12-29,Overturned
+83,458,1,CO-18,Duplicate claim,2025-07-04,Overturned
+84,458,2,CO-16,Missing or invalid information,2025-06-29,Overturned
+85,458,3,CO-97,Bundled service,2025-06-25,Overturned
+86,459,1,CO-29,Timely filing limit exceeded,2025-12-09,Not Appealed
+87,459,2,PR-1,Deductible amount,2025-12-14,Upheld
+88,459,3,CO-16,Missing or invalid information,2025-12-11,Not Appealed
+89,460,1,CO-16,Missing or invalid information,2024-09-22,Overturned
+90,462,1,CO-4,Modifier inconsistent with procedure,2025-06-14,Overturned
+91,465,1,CO-18,Duplicate claim,2024-06-29,Overturned
+92,465,2,CO-16,Missing or invalid information,2024-07-12,Overturned
+93,470,1,CO-29,Timely filing limit exceeded,2025-05-16,Not Appealed
+94,470,2,CO-29,Timely filing limit exceeded,2025-05-19,Upheld
+95,471,1,CO-18,Duplicate claim,2024-11-28,Upheld
+96,472,1,PR-1,Deductible amount,2025-08-03,Overturned
+97,479,1,CO-97,Bundled service,2024-06-24,Upheld
+98,482,1,CO-97,Bundled service,2025-08-25,Upheld
+99,487,1,CO-16,Missing or invalid information,2025-11-28,Upheld
+100,489,1,CO-97,Bundled service,2025-09-20,Upheld
+101,499,1,CO-97,Bundled service,2025-09-30,Not Appealed
+102,504,1,CO-4,Modifier inconsistent with procedure,2025-01-22,Overturned
+103,505,1,CO-4,Modifier inconsistent with procedure,2024-12-27,Upheld
+104,507,1,CO-29,Timely filing limit exceeded,2024-06-04,Overturned
+105,508,1,CO-50,Not medically necessary,2025-08-20,Overturned
+106,508,2,CO-97,Bundled service,2025-08-24,Overturned
+107,512,1,CO-29,Timely filing limit exceeded,2024-07-16,Overturned
+108,512,2,CO-4,Modifier inconsistent with procedure,2024-07-07,Overturned
+109,513,1,CO-97,Bundled service,2024-11-23,Upheld
+110,513,2,CO-29,Timely filing limit exceeded,2024-11-16,Upheld
+111,515,1,CO-4,Modifier inconsistent with procedure,2025-12-27,Overturned
+112,515,2,CO-50,Not medically necessary,2025-12-11,Overturned
+113,521,1,CO-18,Duplicate claim,2025-11-07,Overturned
+114,521,2,PR-1,Deductible amount,2025-11-21,Overturned
+115,533,1,CO-29,Timely filing limit exceeded,2024-11-16,Overturned
+116,536,1,CO-29,Timely filing limit exceeded,2025-07-11,Overturned
+117,538,1,CO-97,Bundled service,2025-11-08,Overturned
+118,538,2,CO-16,Missing or invalid information,2025-11-26,Overturned
+119,538,3,CO-4,Modifier inconsistent with procedure,2025-11-27,Overturned
+120,540,1,CO-29,Timely filing limit exceeded,2025-10-13,Upheld
+121,550,1,CO-18,Duplicate claim,2024-08-31,Overturned
+122,550,2,CO-50,Not medically necessary,2024-09-18,Overturned
+123,554,1,CO-18,Duplicate claim,2025-06-07,Upheld
+124,556,1,CO-4,Modifier inconsistent with procedure,2025-12-30,Not Appealed
+125,556,2,PR-1,Deductible amount,2025-12-26,Not Appealed
+126,560,1,CO-16,Missing or invalid information,2026-02-06,Overturned
+127,560,2,PR-1,Deductible amount,2026-01-25,Overturned
+128,560,3,CO-18,Duplicate claim,2026-01-22,Overturned
+129,565,1,PR-1,Deductible amount,2024-09-29,Upheld
+130,568,1,CO-29,Timely filing limit exceeded,2025-02-01,Overturned
+131,568,2,CO-97,Bundled service,2025-02-09,Overturned
+132,568,3,CO-29,Timely filing limit exceeded,2025-02-10,Overturned
+133,573,1,CO-4,Modifier inconsistent with procedure,2025-10-22,Not Appealed
+134,573,2,PR-1,Deductible amount,2025-10-25,Upheld
+135,573,3,CO-50,Not medically necessary,2025-10-17,Not Appealed
+136,588,1,CO-18,Duplicate claim,2025-01-27,Overturned
+137,588,2,CO-18,Duplicate claim,2025-01-15,Overturned
+138,588,3,CO-4,Modifier inconsistent with procedure,2025-01-26,Overturned
+139,590,1,CO-29,Timely filing limit exceeded,2025-12-09,Overturned
+140,597,1,CO-50,Not medically necessary,2024-04-13,Overturned
+141,597,2,CO-16,Missing or invalid information,2024-04-16,Overturned
+142,597,3,CO-4,Modifier inconsistent with procedure,2024-04-11,Overturned
+143,598,1,CO-50,Not medically necessary,2025-04-28,Upheld
+144,602,1,CO-97,Bundled service,2024-03-04,Not Appealed
+145,602,2,CO-29,Timely filing limit exceeded,2024-02-22,Not Appealed
+146,602,3,CO-50,Not medically necessary,2024-03-11,Upheld
+147,605,1,CO-97,Bundled service,2024-04-21,Overturned
+148,607,1,PR-1,Deductible amount,2024-05-28,Upheld
+149,624,1,CO-50,Not medically necessary,2024-03-06,Not Appealed
+150,624,2,CO-29,Timely filing limit exceeded,2024-03-12,Not Appealed
+151,624,3,CO-97,Bundled service,2024-03-07,Not Appealed
+152,627,1,CO-4,Modifier inconsistent with procedure,2024-09-17,Overturned
+153,627,2,CO-50,Not medically necessary,2024-08-28,Overturned
+154,627,3,CO-97,Bundled service,2024-09-04,Overturned
+155,638,1,PR-1,Deductible amount,2024-05-16,Overturned
+156,638,2,CO-16,Missing or invalid information,2024-05-06,Overturned
+157,639,1,CO-16,Missing or invalid information,2024-03-26,Overturned
+158,646,1,CO-18,Duplicate claim,2025-05-12,Upheld
+159,647,1,CO-29,Timely filing limit exceeded,2025-03-09,Upheld
+160,647,2,CO-50,Not medically necessary,2025-03-11,Not Appealed
+161,647,3,CO-18,Duplicate claim,2025-02-21,Upheld
+162,655,1,CO-4,Modifier inconsistent with procedure,2025-03-14,Overturned
+163,655,2,CO-97,Bundled service,2025-03-28,Overturned
+164,656,1,CO-97,Bundled service,2025-04-27,Not Appealed
+165,656,2,PR-1,Deductible amount,2025-05-02,Not Appealed
+166,656,3,CO-97,Bundled service,2025-04-30,Upheld
+167,676,1,CO-29,Timely filing limit exceeded,2025-11-26,Overturned
+168,682,1,CO-50,Not medically necessary,2024-08-30,Upheld
+169,682,2,CO-29,Timely filing limit exceeded,2024-09-06,Not Appealed
+170,682,3,PR-1,Deductible amount,2024-09-04,Upheld
+171,710,1,CO-29,Timely filing limit exceeded,2025-10-30,Not Appealed
+172,723,1,CO-16,Missing or invalid information,2024-10-01,Not Appealed
+173,724,1,CO-4,Modifier inconsistent with procedure,2024-04-13,Overturned
+174,732,1,CO-18,Duplicate claim,2024-07-04,Upheld
+175,732,2,CO-50,Not medically necessary,2024-06-22,Not Appealed
+176,734,1,CO-18,Duplicate claim,2024-02-28,Not Appealed
+177,790,1,CO-97,Bundled service,2025-05-25,Overturned
+178,849,1,CO-97,Bundled service,2026-01-25,Overturned
+179,852,1,PR-1,Deductible amount,2025-12-04,Overturned
+180,866,1,CO-50,Not medically necessary,2024-05-01,Overturned
+181,866,2,CO-4,Modifier inconsistent with procedure,2024-05-02,Overturned
+182,866,3,CO-4,Modifier inconsistent with procedure,2024-05-10,Overturned
+183,872,1,CO-4,Modifier inconsistent with procedure,2024-11-10,Overturned
+184,874,1,CO-29,Timely filing limit exceeded,2024-07-12,Overturned
+185,874,2,CO-4,Modifier inconsistent with procedure,2024-07-30,Overturned
+186,880,1,CO-50,Not medically necessary,2025-07-04,Upheld
+187,880,2,CO-97,Bundled service,2025-07-05,Upheld
+188,952,1,CO-29,Timely filing limit exceeded,2025-12-02,Upheld
+189,956,1,CO-29,Timely filing limit exceeded,2025-07-27,Not Appealed
+190,958,1,CO-18,Duplicate claim,2024-08-06,Not Appealed
+191,958,2,CO-29,Timely filing limit exceeded,2024-07-31,Upheld
+192,958,3,CO-29,Timely filing limit exceeded,2024-08-07,Upheld
+193,959,1,CO-50,Not medically necessary,2025-12-05,Overturned
+194,959,2,CO-29,Timely filing limit exceeded,2025-12-20,Overturned
+195,960,1,CO-97,Bundled service,2025-12-21,Upheld
+196,960,2,CO-16,Missing or invalid information,2025-12-02,Upheld
+197,962,1,CO-4,Modifier inconsistent with procedure,2024-08-28,Not Appealed
+198,981,1,CO-4,Modifier inconsistent with procedure,2024-03-29,Not Appealed
+199,981,2,CO-50,Not medically necessary,2024-04-02,Upheld
+200,981,3,CO-18,Duplicate claim,2024-03-24,Not Appealed
+201,983,1,CO-29,Timely filing limit exceeded,2025-04-04,Overturned
+202,983,2,PR-1,Deductible amount,2025-03-20,Overturned
+203,990,1,PR-1,Deductible amount,2024-11-04,Overturned
+204,995,1,CO-18,Duplicate claim,2026-01-17,Overturned
+205,995,2,CO-4,Modifier inconsistent with procedure,2026-01-18,Overturned
+206,995,3,CO-18,Duplicate claim,2026-01-09,Overturned
+207,998,1,CO-50,Not medically necessary,2024-05-07,Overturned
+208,998,2,CO-50,Not medically necessary,2024-05-24,Overturned
+209,1002,1,CO-29,Timely filing limit exceeded,2025-10-17,Overturned
+210,1010,1,CO-16,Missing or invalid information,2025-09-07,Upheld
+211,1010,2,PR-1,Deductible amount,2025-09-11,Not Appealed
+212,1017,1,PR-1,Deductible amount,2024-04-03,Overturned
+213,1035,1,CO-97,Bundled service,2025-02-08,Not Appealed
+214,1035,2,CO-97,Bundled service,2025-02-18,Upheld
+215,1035,3,PR-1,Deductible amount,2025-02-16,Upheld
+216,1052,1,PR-1,Deductible amount,2025-02-17,Upheld
+217,1057,1,CO-4,Modifier inconsistent with procedure,2024-12-16,Overturned
+218,1078,1,CO-16,Missing or invalid information,2024-10-15,Upheld
+219,1078,2,CO-97,Bundled service,2024-10-01,Upheld
+220,1080,1,CO-50,Not medically necessary,2025-10-01,Not Appealed
+221,1080,2,CO-18,Duplicate claim,2025-10-18,Not Appealed
+222,1080,3,CO-97,Bundled service,2025-10-13,Upheld
+223,1083,1,CO-97,Bundled service,2024-02-10,Overturned
+224,1088,1,PR-1,Deductible amount,2024-11-23,Upheld
+225,1088,2,CO-18,Duplicate claim,2024-11-05,Not Appealed
+226,1096,1,CO-97,Bundled service,2024-06-14,Overturned
+227,1119,1,CO-50,Not medically necessary,2025-10-31,Overturned
+228,1123,1,CO-16,Missing or invalid information,2024-11-13,Overturned
+229,1123,2,CO-18,Duplicate claim,2024-11-07,Overturned
+230,1123,3,CO-50,Not medically necessary,2024-10-23,Overturned
+231,1137,1,CO-18,Duplicate claim,2025-08-25,Overturned
+232,1140,1,CO-16,Missing or invalid information,2024-07-12,Overturned
+233,1143,1,CO-29,Timely filing limit exceeded,2025-08-17,Upheld
+234,1155,1,CO-18,Duplicate claim,2024-11-30,Overturned
+235,1155,2,CO-4,Modifier inconsistent with procedure,2024-11-28,Overturned
+236,1155,3,CO-4,Modifier inconsistent with procedure,2024-11-21,Overturned
+237,1159,1,CO-4,Modifier inconsistent with procedure,2024-12-30,Overturned
+238,1368,1,CO-29,Timely filing limit exceeded,2024-04-11,Overturned
+239,1372,1,CO-50,Not medically necessary,2024-03-05,Overturned
+240,1379,1,CO-97,Bundled service,2025-09-30,Overturned
+241,1381,1,CO-29,Timely filing limit exceeded,2025-07-03,Upheld
+242,1381,2,CO-18,Duplicate claim,2025-07-05,Upheld
+243,1381,3,CO-4,Modifier inconsistent with procedure,2025-07-10,Upheld
+244,1382,1,CO-16,Missing or invalid information,2025-06-24,Upheld
+245,1382,2,PR-1,Deductible amount,2025-06-24,Not Appealed
+246,1387,1,CO-16,Missing or invalid information,2024-11-12,Overturned
+247,1390,1,PR-1,Deductible amount,2024-01-28,Overturned
+248,1399,1,CO-50,Not medically necessary,2025-08-13,Overturned
+249,1407,1,CO-4,Modifier inconsistent with procedure,2025-12-06,Not Appealed
+250,1407,2,CO-18,Duplicate claim,2025-12-08,Upheld
+251,1409,1,PR-1,Deductible amount,2024-11-14,Overturned
+252,1409,2,CO-97,Bundled service,2024-11-13,Overturned
+253,1411,1,PR-1,Deductible amount,2025-07-29,Overturned
+254,1414,1,CO-29,Timely filing limit exceeded,2025-11-24,Overturned
+255,1414,2,CO-18,Duplicate claim,2025-11-20,Overturned
+256,1414,3,CO-29,Timely filing limit exceeded,2025-11-26,Overturned
+257,1422,1,CO-16,Missing or invalid information,2024-05-31,Not Appealed
+258,1422,2,CO-18,Duplicate claim,2024-05-20,Not Appealed
+259,1422,3,PR-1,Deductible amount,2024-05-19,Not Appealed
+260,1431,1,CO-50,Not medically necessary,2024-11-09,Overturned
+261,1431,2,CO-97,Bundled service,2024-11-25,Overturned
+262,1435,1,CO-16,Missing or invalid information,2024-02-12,Overturned
+263,1440,1,PR-1,Deductible amount,2024-06-20,Overturned
+264,1442,1,CO-50,Not medically necessary,2024-04-28,Overturned
+265,1444,1,CO-18,Duplicate claim,2024-05-26,Overturned
+266,1448,1,CO-16,Missing or invalid information,2024-11-30,Overturned
+267,1448,2,CO-29,Timely filing limit exceeded,2024-12-15,Overturned
+268,1450,1,CO-4,Modifier inconsistent with procedure,2024-03-04,Not Appealed
+269,1450,2,CO-18,Duplicate claim,2024-02-23,Not Appealed
+270,1455,1,CO-4,Modifier inconsistent with procedure,2025-09-13,Upheld
+271,1467,1,CO-18,Duplicate claim,2025-01-09,Overturned
+272,1467,2,CO-29,Timely filing limit exceeded,2025-01-18,Overturned
+273,1467,3,CO-29,Timely filing limit exceeded,2025-01-11,Overturned
+274,1472,1,CO-97,Bundled service,2024-04-26,Not Appealed
+275,1490,1,CO-18,Duplicate claim,2024-09-20,Overturned
+276,1490,2,CO-50,Not medically necessary,2024-09-16,Overturned
+277,1490,3,CO-50,Not medically necessary,2024-10-02,Overturned
+278,1496,1,PR-1,Deductible amount,2024-04-21,Overturned
+279,1506,1,CO-4,Modifier inconsistent with procedure,2025-10-17,Overturned
+280,1506,2,CO-97,Bundled service,2025-10-23,Overturned
+281,1508,1,CO-4,Modifier inconsistent with procedure,2024-04-18,Overturned
+282,1530,1,CO-4,Modifier inconsistent with procedure,2024-11-04,Overturned
+283,1530,2,PR-1,Deductible amount,2024-11-03,Overturned
+284,1535,1,PR-1,Deductible amount,2025-08-11,Overturned
+285,1542,1,PR-1,Deductible amount,2024-07-29,Overturned
+286,1542,2,PR-1,Deductible amount,2024-07-27,Overturned
+287,1546,1,CO-97,Bundled service,2024-09-29,Upheld
+288,1546,2,CO-29,Timely filing limit exceeded,2024-10-10,Not Appealed
+289,1546,3,PR-1,Deductible amount,2024-09-25,Upheld
+290,1549,1,CO-50,Not medically necessary,2024-05-05,Overturned
+291,1549,2,CO-18,Duplicate claim,2024-04-19,Overturned
+292,1564,1,CO-29,Timely filing limit exceeded,2025-04-09,Overturned
+293,1568,1,PR-1,Deductible amount,2024-03-16,Overturned
+294,1568,2,CO-50,Not medically necessary,2024-03-19,Overturned
+295,1569,1,CO-16,Missing or invalid information,2026-01-07,Upheld
+296,1571,1,CO-50,Not medically necessary,2024-02-13,Overturned
+297,1573,1,CO-4,Modifier inconsistent with procedure,2025-02-09,Overturned
+298,1573,2,CO-4,Modifier inconsistent with procedure,2025-02-14,Overturned
+299,1573,3,CO-97,Bundled service,2025-01-30,Overturned
+300,1579,1,CO-16,Missing or invalid information,2024-06-12,Overturned
+301,1579,2,CO-18,Duplicate claim,2024-05-23,Overturned
+302,1581,1,CO-4,Modifier inconsistent with procedure,2024-11-29,Overturned
+303,1581,2,CO-18,Duplicate claim,2024-12-03,Overturned
+304,1582,1,PR-1,Deductible amount,2024-04-01,Upheld
+305,1582,2,CO-29,Timely filing limit exceeded,2024-03-21,Not Appealed
+306,1582,3,CO-97,Bundled service,2024-04-09,Upheld
+307,1583,1,CO-4,Modifier inconsistent with procedure,2024-08-18,Not Appealed
+308,1585,1,CO-50,Not medically necessary,2024-08-30,Not Appealed
+309,1598,1,CO-16,Missing or invalid information,2024-03-29,Overturned
+310,1604,1,CO-97,Bundled service,2024-04-14,Not Appealed
+311,1606,1,CO-29,Timely filing limit exceeded,2024-11-12,Overturned
+312,1625,1,PR-1,Deductible amount,2026-01-09,Upheld
+313,1633,1,CO-18,Duplicate claim,2024-04-18,Not Appealed
+314,1638,1,CO-4,Modifier inconsistent with procedure,2025-02-25,Upheld
+315,1638,2,CO-97,Bundled service,2025-03-06,Not Appealed
+316,1639,1,PR-1,Deductible amount,2024-03-22,Overturned
+317,1649,1,CO-97,Bundled service,2025-09-11,Not Appealed
+318,1649,2,CO-16,Missing or invalid information,2025-09-10,Upheld
+319,1650,1,CO-18,Duplicate claim,2025-01-04,Not Appealed
+320,1650,2,CO-18,Duplicate claim,2025-01-01,Upheld
+321,1655,1,CO-18,Duplicate claim,2024-11-04,Not Appealed
+322,1665,1,CO-18,Duplicate claim,2024-11-24,Overturned
+323,1667,1,PR-1,Deductible amount,2025-02-12,Overturned
+324,1675,1,CO-18,Duplicate claim,2024-05-29,Upheld
+325,1678,1,CO-4,Modifier inconsistent with procedure,2025-08-04,Upheld
+326,1683,1,CO-18,Duplicate claim,2024-05-05,Overturned
+327,1683,2,CO-50,Not medically necessary,2024-05-03,Overturned
+328,1683,3,CO-18,Duplicate claim,2024-04-25,Overturned
+329,1686,1,CO-16,Missing or invalid information,2025-02-23,Not Appealed
+330,1686,2,CO-97,Bundled service,2025-02-06,Not Appealed
+331,1705,1,PR-1,Deductible amount,2024-08-12,Overturned
+332,1708,1,CO-4,Modifier inconsistent with procedure,2025-03-28,Overturned
+333,1713,1,PR-1,Deductible amount,2024-12-31,Upheld
+334,1713,2,CO-97,Bundled service,2024-12-27,Not Appealed
+335,1713,3,CO-97,Bundled service,2025-01-03,Not Appealed
+336,1718,1,CO-4,Modifier inconsistent with procedure,2024-05-29,Upheld
+337,1718,2,PR-1,Deductible amount,2024-06-18,Not Appealed
+338,1719,1,CO-97,Bundled service,2024-12-08,Not Appealed
+339,1719,2,PR-1,Deductible amount,2024-12-05,Not Appealed
+340,1725,1,CO-16,Missing or invalid information,2024-03-22,Overturned
+341,1725,2,CO-97,Bundled service,2024-03-11,Overturned
+342,1729,1,CO-29,Timely filing limit exceeded,2024-02-24,Upheld
+343,1734,1,CO-50,Not medically necessary,2025-12-05,Overturned
+344,1746,1,CO-29,Timely filing limit exceeded,2024-08-23,Upheld
+345,1752,1,CO-18,Duplicate claim,2024-06-25,Not Appealed
+346,1752,2,PR-1,Deductible amount,2024-06-27,Not Appealed
+347,1752,3,PR-1,Deductible amount,2024-07-01,Not Appealed
+348,1753,1,CO-18,Duplicate claim,2025-11-06,Overturned
+349,1753,2,CO-4,Modifier inconsistent with procedure,2025-11-01,Overturned
+350,1757,1,CO-50,Not medically necessary,2025-02-10,Overturned
+351,1757,2,CO-18,Duplicate claim,2025-02-07,Overturned
+352,1757,3,PR-1,Deductible amount,2025-02-27,Overturned
+353,1758,1,CO-97,Bundled service,2025-07-15,Upheld
+354,1758,2,PR-1,Deductible amount,2025-08-02,Upheld
+355,1758,3,CO-18,Duplicate claim,2025-07-28,Not Appealed
+356,1759,1,PR-1,Deductible amount,2025-10-14,Overturned
+357,1759,2,CO-29,Timely filing limit exceeded,2025-10-03,Overturned
+358,1760,1,CO-18,Duplicate claim,2024-10-30,Upheld
+359,1771,1,CO-29,Timely filing limit exceeded,2024-08-03,Upheld
+360,1771,2,CO-18,Duplicate claim,2024-07-22,Upheld
+361,1773,1,CO-16,Missing or invalid information,2024-03-09,Upheld
+362,1773,2,CO-50,Not medically necessary,2024-03-12,Upheld
+363,1773,3,CO-4,Modifier inconsistent with procedure,2024-03-21,Not Appealed
+364,1774,1,CO-4,Modifier inconsistent with procedure,2024-07-02,Overturned
+365,1774,2,CO-4,Modifier inconsistent with procedure,2024-07-12,Overturned
+366,1776,1,CO-97,Bundled service,2025-05-27,Overturned
+367,1776,2,CO-50,Not medically necessary,2025-05-17,Overturned
+368,1776,3,CO-4,Modifier inconsistent with procedure,2025-06-01,Overturned
+369,1779,1,CO-97,Bundled service,2025-02-25,Overturned
+370,1779,2,CO-97,Bundled service,2025-03-05,Overturned
+371,1779,3,CO-29,Timely filing limit exceeded,2025-03-13,Overturned
+372,1780,1,CO-97,Bundled service,2024-02-06,Upheld
+373,1782,1,CO-29,Timely filing limit exceeded,2024-02-12,Upheld
+374,1782,2,CO-4,Modifier inconsistent with procedure,2024-02-13,Not Appealed
+375,1782,3,CO-16,Missing or invalid information,2024-01-28,Upheld
+376,1784,1,CO-16,Missing or invalid information,2025-10-24,Overturned
+377,1784,2,CO-18,Duplicate claim,2025-11-10,Overturned
+378,1784,3,CO-4,Modifier inconsistent with procedure,2025-10-26,Overturned
+379,1787,1,PR-1,Deductible amount,2025-10-14,Not Appealed
+380,1787,2,CO-4,Modifier inconsistent with procedure,2025-10-16,Not Appealed
+381,1793,1,CO-4,Modifier inconsistent with procedure,2024-09-14,Upheld
+382,1794,1,CO-16,Missing or invalid information,2025-05-14,Overturned
+383,1794,2,CO-97,Bundled service,2025-05-20,Overturned
+384,1797,1,CO-16,Missing or invalid information,2025-05-01,Overturned
+385,1799,1,CO-97,Bundled service,2025-02-05,Overturned
+386,1802,1,CO-16,Missing or invalid information,2025-03-22,Overturned
+387,1804,1,CO-50,Not medically necessary,2024-04-07,Overturned
+388,1804,2,CO-4,Modifier inconsistent with procedure,2024-04-25,Overturned
+389,1804,3,CO-50,Not medically necessary,2024-04-18,Overturned
+390,1806,1,CO-16,Missing or invalid information,2025-10-12,Not Appealed
+391,1806,2,CO-4,Modifier inconsistent with procedure,2025-10-02,Upheld
+392,1806,3,CO-4,Modifier inconsistent with procedure,2025-10-11,Not Appealed
+393,1809,1,PR-1,Deductible amount,2025-01-18,Not Appealed
+394,1809,2,CO-29,Timely filing limit exceeded,2025-02-06,Not Appealed
+395,1810,1,CO-97,Bundled service,2024-11-29,Not Appealed
+396,1819,1,CO-97,Bundled service,2024-05-08,Upheld
+397,1832,1,CO-29,Timely filing limit exceeded,2024-12-22,Not Appealed
+398,1842,1,CO-97,Bundled service,2024-02-16,Not Appealed
+399,1850,1,CO-29,Timely filing limit exceeded,2025-03-11,Upheld
+400,1878,1,CO-29,Timely filing limit exceeded,2025-11-13,Overturned
+401,1878,2,CO-16,Missing or invalid information,2025-11-18,Overturned
+402,1880,1,PR-1,Deductible amount,2024-11-22,Not Appealed
+403,1884,1,CO-97,Bundled service,2024-07-04,Not Appealed
+404,1892,1,CO-50,Not medically necessary,2024-02-13,Not Appealed
+405,1893,1,CO-4,Modifier inconsistent with procedure,2025-07-14,Upheld
+406,1893,2,PR-1,Deductible amount,2025-07-22,Not Appealed
+407,1893,3,CO-16,Missing or invalid information,2025-07-16,Upheld
+408,1898,1,CO-18,Duplicate claim,2025-01-15,Overturned
+409,1898,2,CO-18,Duplicate claim,2025-01-20,Overturned
+410,1898,3,CO-18,Duplicate claim,2025-01-10,Overturned
+411,1904,1,CO-29,Timely filing limit exceeded,2024-12-27,Overturned
+412,1908,1,CO-97,Bundled service,2024-03-26,Not Appealed
+413,1913,1,CO-4,Modifier inconsistent with procedure,2024-02-18,Overturned
+414,1913,2,CO-50,Not medically necessary,2024-02-16,Overturned
+415,1919,1,CO-29,Timely filing limit exceeded,2025-07-13,Overturned
+416,1937,1,CO-29,Timely filing limit exceeded,2024-08-14,Overturned
+417,1937,2,CO-29,Timely filing limit exceeded,2024-07-31,Overturned
+418,1941,1,CO-4,Modifier inconsistent with procedure,2024-07-03,Overturned
+419,1952,1,CO-18,Duplicate claim,2024-11-22,Not Appealed
+420,1959,1,CO-16,Missing or invalid information,2025-02-05,Not Appealed
+421,1960,1,CO-97,Bundled service,2025-06-06,Upheld
+422,1960,2,CO-97,Bundled service,2025-06-18,Not Appealed
+423,1990,1,CO-97,Bundled service,2025-03-27,Upheld
+424,1990,2,CO-50,Not medically necessary,2025-03-30,Upheld
+425,1990,3,CO-16,Missing or invalid information,2025-03-28,Not Appealed
+426,2009,1,PR-1,Deductible amount,2024-03-07,Overturned
+427,2009,2,CO-50,Not medically necessary,2024-03-20,Overturned
+428,2014,1,CO-16,Missing or invalid information,2024-10-31,Overturned
+429,2014,2,CO-50,Not medically necessary,2024-11-09,Overturned
+430,2014,3,CO-50,Not medically necessary,2024-10-31,Overturned
+431,2019,1,CO-50,Not medically necessary,2025-04-25,Overturned
+432,2019,2,CO-4,Modifier inconsistent with procedure,2025-04-29,Overturned
+433,2027,1,PR-1,Deductible amount,2025-02-12,Upheld
+434,2027,2,CO-16,Missing or invalid information,2025-02-25,Upheld
+435,2027,3,CO-4,Modifier inconsistent with procedure,2025-02-07,Upheld
+436,2064,1,CO-18,Duplicate claim,2025-07-27,Not Appealed
+437,2076,1,CO-97,Bundled service,2025-07-05,Not Appealed
+438,2081,1,CO-18,Duplicate claim,2024-07-14,Overturned
+439,2190,1,CO-18,Duplicate claim,2024-09-16,Overturned
+440,2190,2,CO-18,Duplicate claim,2024-09-20,Overturned
+441,2190,3,PR-1,Deductible amount,2024-09-09,Overturned
+442,2193,1,PR-1,Deductible amount,2024-03-24,Overturned
+443,2193,2,CO-16,Missing or invalid information,2024-04-03,Overturned
+444,2193,3,CO-16,Missing or invalid information,2024-04-07,Overturned
+445,2200,1,PR-1,Deductible amount,2024-10-16,Not Appealed
+446,2200,2,CO-16,Missing or invalid information,2024-10-13,Not Appealed
+447,2213,1,CO-4,Modifier inconsistent with procedure,2025-10-09,Overturned
+448,2218,1,CO-97,Bundled service,2024-07-16,Not Appealed
+449,2218,2,CO-97,Bundled service,2024-07-10,Not Appealed
+450,2226,1,CO-18,Duplicate claim,2024-05-02,Overturned
+451,2226,2,PR-1,Deductible amount,2024-05-01,Overturned
+452,2226,3,PR-1,Deductible amount,2024-05-01,Overturned
+453,2229,1,CO-50,Not medically necessary,2024-05-07,Not Appealed
+454,2229,2,CO-16,Missing or invalid information,2024-04-28,Upheld
+455,2231,1,CO-50,Not medically necessary,2025-03-31,Upheld
+456,2231,2,CO-16,Missing or invalid information,2025-04-10,Not Appealed
+457,2246,1,CO-29,Timely filing limit exceeded,2024-10-07,Overturned
+458,2266,1,CO-4,Modifier inconsistent with procedure,2024-05-01,Not Appealed
+459,2276,1,PR-1,Deductible amount,2024-12-31,Overturned
+460,2276,2,PR-1,Deductible amount,2025-01-14,Overturned
+461,2282,1,CO-97,Bundled service,2025-11-07,Overturned
+462,2282,2,CO-29,Timely filing limit exceeded,2025-10-29,Overturned
+463,2282,3,CO-29,Timely filing limit exceeded,2025-10-17,Overturned
+464,2283,1,CO-16,Missing or invalid information,2025-07-02,Overturned
+465,2283,2,CO-50,Not medically necessary,2025-06-26,Overturned
+466,2283,3,CO-18,Duplicate claim,2025-06-14,Overturned
+467,2284,1,CO-97,Bundled service,2024-11-05,Overturned
+468,2284,2,CO-29,Timely filing limit exceeded,2024-10-19,Overturned
+469,2289,1,CO-29,Timely filing limit exceeded,2025-09-08,Overturned
+470,2293,1,CO-16,Missing or invalid information,2025-11-08,Not Appealed
+471,2293,2,CO-97,Bundled service,2025-10-26,Not Appealed
+472,2293,3,CO-97,Bundled service,2025-11-09,Upheld
+473,2301,1,CO-29,Timely filing limit exceeded,2025-04-07,Overturned
+474,2302,1,PR-1,Deductible amount,2025-01-05,Overturned
+475,2302,2,PR-1,Deductible amount,2025-01-16,Overturned
+476,2302,3,CO-4,Modifier inconsistent with procedure,2025-01-05,Overturned
+477,2311,1,CO-16,Missing or invalid information,2025-11-24,Overturned
+478,2311,2,CO-97,Bundled service,2025-11-23,Overturned
+479,2317,1,CO-4,Modifier inconsistent with procedure,2024-07-31,Not Appealed
+480,2320,1,CO-29,Timely filing limit exceeded,2024-07-26,Overturned
+481,2338,1,CO-29,Timely filing limit exceeded,2024-02-04,Upheld
+482,2338,2,CO-4,Modifier inconsistent with procedure,2024-01-28,Not Appealed
+483,2342,1,PR-1,Deductible amount,2026-01-07,Overturned
+484,2342,2,CO-4,Modifier inconsistent with procedure,2025-12-24,Overturned
+485,2342,3,CO-97,Bundled service,2026-01-11,Overturned
+486,2350,1,PR-1,Deductible amount,2024-07-01,Overturned
+487,2350,2,CO-18,Duplicate claim,2024-07-10,Overturned
+488,2353,1,CO-4,Modifier inconsistent with procedure,2025-11-10,Overturned
+489,2361,1,PR-1,Deductible amount,2025-12-06,Overturned
+490,2361,2,CO-18,Duplicate claim,2025-12-07,Overturned
+491,2361,3,CO-29,Timely filing limit exceeded,2025-11-23,Overturned
+492,2362,1,CO-16,Missing or invalid information,2024-04-21,Not Appealed
+493,2362,2,PR-1,Deductible amount,2024-04-25,Not Appealed
+494,2373,1,PR-1,Deductible amount,2024-12-10,Overturned
+495,2373,2,CO-16,Missing or invalid information,2024-12-24,Overturned
+496,2373,3,PR-1,Deductible amount,2024-12-30,Overturned
+497,2380,1,CO-29,Timely filing limit exceeded,2024-06-10,Upheld
+498,2384,1,CO-29,Timely filing limit exceeded,2025-11-09,Overturned
+499,2384,2,CO-4,Modifier inconsistent with procedure,2025-11-19,Overturned
+500,2384,3,CO-50,Not medically necessary,2025-11-06,Overturned
+501,2391,1,CO-29,Timely filing limit exceeded,2024-06-02,Upheld
+502,2391,2,CO-18,Duplicate claim,2024-05-14,Not Appealed
+503,2391,3,CO-97,Bundled service,2024-05-28,Upheld
+504,2395,1,PR-1,Deductible amount,2026-01-12,Overturned
+505,2396,1,PR-1,Deductible amount,2024-07-24,Overturned
+506,2408,1,CO-29,Timely filing limit exceeded,2025-07-25,Not Appealed
+507,2411,1,CO-50,Not medically necessary,2025-08-15,Overturned
+508,2411,2,CO-29,Timely filing limit exceeded,2025-08-11,Overturned
+509,2411,3,CO-18,Duplicate claim,2025-08-09,Overturned
+510,2414,1,CO-18,Duplicate claim,2024-10-19,Upheld
+511,2414,2,CO-50,Not medically necessary,2024-10-22,Upheld
+512,2424,1,CO-18,Duplicate claim,2025-11-05,Overturned
+513,2427,1,CO-29,Timely filing limit exceeded,2025-01-24,Overturned
+514,2427,2,CO-16,Missing or invalid information,2025-01-12,Overturned
+515,2428,1,PR-1,Deductible amount,2024-02-19,Upheld
+516,2428,2,PR-1,Deductible amount,2024-02-20,Upheld
+517,2428,3,CO-97,Bundled service,2024-02-29,Not Appealed
+518,2430,1,CO-97,Bundled service,2024-08-24,Not Appealed
+519,2430,2,CO-16,Missing or invalid information,2024-08-26,Not Appealed
+520,2438,1,CO-29,Timely filing limit exceeded,2024-07-22,Overturned
+521,2446,1,CO-16,Missing or invalid information,2025-11-17,Overturned
+522,2446,2,CO-18,Duplicate claim,2025-11-07,Overturned
+523,2451,1,CO-29,Timely filing limit exceeded,2025-05-05,Overturned
+524,2451,2,CO-97,Bundled service,2025-05-15,Overturned
+525,2451,3,CO-18,Duplicate claim,2025-05-12,Overturned
+526,2453,1,CO-4,Modifier inconsistent with procedure,2025-08-27,Overturned
+527,2453,2,PR-1,Deductible amount,2025-08-17,Overturned
+528,2457,1,CO-97,Bundled service,2025-09-14,Overturned
+529,2464,1,CO-97,Bundled service,2026-01-13,Overturned
+530,2464,2,CO-4,Modifier inconsistent with procedure,2026-01-17,Overturned
+531,2478,1,PR-1,Deductible amount,2025-02-28,Overturned
+532,2480,1,CO-16,Missing or invalid information,2024-07-17,Overturned
+533,2480,2,CO-97,Bundled service,2024-07-15,Overturned
+534,2486,1,PR-1,Deductible amount,2024-09-01,Overturned
+535,2497,1,CO-29,Timely filing limit exceeded,2026-02-04,Overturned
+536,2497,2,CO-29,Timely filing limit exceeded,2026-01-19,Overturned
+537,2508,1,CO-50,Not medically necessary,2024-07-31,Not Appealed
+538,2510,1,CO-50,Not medically necessary,2025-09-16,Overturned
+539,2514,1,PR-1,Deductible amount,2025-12-23,Upheld
+540,2531,1,CO-16,Missing or invalid information,2024-03-13,Not Appealed
+541,2548,1,CO-16,Missing or invalid information,2025-01-30,Upheld
+542,2550,1,CO-4,Modifier inconsistent with procedure,2025-06-11,Upheld
+543,2564,1,CO-29,Timely filing limit exceeded,2024-07-23,Overturned
+544,2576,1,PR-1,Deductible amount,2024-08-05,Overturned
+545,2576,2,CO-18,Duplicate claim,2024-08-14,Overturned
+546,2580,1,CO-97,Bundled service,2025-05-02,Not Appealed
+547,2581,1,CO-16,Missing or invalid information,2024-02-07,Upheld
+548,2581,2,CO-97,Bundled service,2024-02-13,Not Appealed
+549,2597,1,CO-16,Missing or invalid information,2024-08-05,Not Appealed
+550,2597,2,CO-29,Timely filing limit exceeded,2024-07-19,Upheld
+551,2603,1,CO-4,Modifier inconsistent with procedure,2025-08-07,Overturned
+552,2603,2,CO-97,Bundled service,2025-08-18,Overturned
+553,2603,3,CO-50,Not medically necessary,2025-08-09,Overturned
+554,2612,1,CO-18,Duplicate claim,2025-02-23,Not Appealed
+555,2615,1,CO-16,Missing or invalid information,2025-11-19,Overturned
+556,2615,2,CO-16,Missing or invalid information,2025-11-24,Overturned
+557,2623,1,CO-4,Modifier inconsistent with procedure,2025-03-12,Overturned
+558,2623,2,CO-50,Not medically necessary,2025-03-13,Overturned
+559,2625,1,CO-50,Not medically necessary,2025-07-19,Not Appealed
+560,2633,1,CO-29,Timely filing limit exceeded,2026-01-18,Upheld
+561,2633,2,PR-1,Deductible amount,2026-01-28,Upheld
+562,2635,1,CO-18,Duplicate claim,2025-01-18,Not Appealed
+563,2635,2,CO-50,Not medically necessary,2025-01-28,Upheld
+564,2635,3,CO-50,Not medically necessary,2025-01-14,Not Appealed
+565,2658,1,CO-50,Not medically necessary,2024-08-26,Overturned
+566,2665,1,CO-18,Duplicate claim,2026-01-17,Upheld
+567,2676,1,CO-29,Timely filing limit exceeded,2025-08-04,Upheld
+568,2677,1,CO-29,Timely filing limit exceeded,2025-05-18,Overturned
+569,2687,1,CO-18,Duplicate claim,2025-04-06,Upheld
+570,2687,2,CO-29,Timely filing limit exceeded,2025-04-25,Upheld
+571,2688,1,CO-50,Not medically necessary,2025-09-28,Not Appealed
+572,2688,2,CO-4,Modifier inconsistent with procedure,2025-09-17,Not Appealed
+573,2688,3,CO-18,Duplicate claim,2025-09-18,Upheld
+574,2698,1,CO-18,Duplicate claim,2025-10-18,Overturned
+575,2698,2,CO-29,Timely filing limit exceeded,2025-10-23,Overturned
+576,2698,3,CO-18,Duplicate claim,2025-10-27,Overturned
+577,2703,1,CO-97,Bundled service,2025-07-06,Not Appealed
+578,2703,2,CO-18,Duplicate claim,2025-07-13,Not Appealed
+579,2708,1,CO-50,Not medically necessary,2025-04-04,Not Appealed
+580,2712,1,CO-50,Not medically necessary,2024-10-29,Overturned
+581,2716,1,CO-29,Timely filing limit exceeded,2025-09-19,Not Appealed
+582,2716,2,CO-4,Modifier inconsistent with procedure,2025-09-14,Not Appealed
+583,2721,1,CO-29,Timely filing limit exceeded,2024-10-18,Overturned
+584,2736,1,CO-50,Not medically necessary,2025-07-16,Upheld
+585,2736,2,PR-1,Deductible amount,2025-07-14,Upheld
+586,2741,1,PR-1,Deductible amount,2024-08-30,Overturned
+587,2741,2,CO-18,Duplicate claim,2024-08-13,Overturned
+588,2741,3,CO-29,Timely filing limit exceeded,2024-09-04,Overturned
+589,2744,1,PR-1,Deductible amount,2024-01-13,Not Appealed
+590,2775,1,PR-1,Deductible amount,2024-10-24,Overturned
+591,2775,2,CO-97,Bundled service,2024-10-27,Overturned
+592,2777,1,CO-18,Duplicate claim,2024-07-14,Overturned
+593,2777,2,CO-97,Bundled service,2024-07-29,Overturned
+594,2777,3,CO-16,Missing or invalid information,2024-07-14,Overturned
+595,2778,1,CO-16,Missing or invalid information,2024-12-22,Not Appealed
+596,2780,1,CO-4,Modifier inconsistent with procedure,2024-09-01,Overturned
+597,2780,2,PR-1,Deductible amount,2024-08-31,Overturned
+598,2780,3,CO-4,Modifier inconsistent with procedure,2024-09-10,Overturned
+599,2784,1,CO-4,Modifier inconsistent with procedure,2025-01-27,Overturned
+600,2784,2,CO-50,Not medically necessary,2025-01-17,Overturned
+601,2787,1,CO-50,Not medically necessary,2025-01-09,Overturned
+602,2787,2,CO-4,Modifier inconsistent with procedure,2025-01-04,Overturned
+603,2803,1,CO-97,Bundled service,2025-01-09,Upheld
+604,2803,2,CO-50,Not medically necessary,2025-01-10,Upheld
+605,2803,3,CO-4,Modifier inconsistent with procedure,2025-01-08,Not Appealed
+606,2806,1,CO-18,Duplicate claim,2024-04-18,Not Appealed
+607,2807,1,CO-97,Bundled service,2024-04-02,Overturned
+608,2807,2,CO-16,Missing or invalid information,2024-03-24,Overturned
+609,2808,1,CO-29,Timely filing limit exceeded,2025-09-11,Overturned
+610,2808,2,CO-18,Duplicate claim,2025-08-29,Overturned
+611,2808,3,PR-1,Deductible amount,2025-08-21,Overturned
+612,2825,1,PR-1,Deductible amount,2025-05-15,Upheld
+613,2825,2,CO-50,Not medically necessary,2025-05-07,Upheld
+614,2830,1,CO-50,Not medically necessary,2025-08-26,Overturned
+615,2833,1,CO-50,Not medically necessary,2025-03-01,Overturned
+616,2833,2,CO-97,Bundled service,2025-02-10,Overturned
+617,2836,1,CO-18,Duplicate claim,2025-07-27,Not Appealed
+618,2844,1,CO-18,Duplicate claim,2024-09-05,Not Appealed
+619,2853,1,CO-29,Timely filing limit exceeded,2024-11-08,Not Appealed
+620,2859,1,CO-50,Not medically necessary,2025-01-24,Overturned
+621,2863,1,CO-18,Duplicate claim,2025-06-10,Not Appealed
+622,2864,1,CO-18,Duplicate claim,2025-04-29,Not Appealed
+623,2864,2,CO-29,Timely filing limit exceeded,2025-04-15,Upheld
+624,2874,1,CO-97,Bundled service,2025-05-23,Not Appealed
+625,2878,1,CO-97,Bundled service,2024-02-10,Not Appealed
+626,2893,1,CO-16,Missing or invalid information,2025-07-02,Upheld
+627,2893,2,CO-4,Modifier inconsistent with procedure,2025-06-23,Upheld
+628,2893,3,CO-29,Timely filing limit exceeded,2025-06-27,Upheld
+629,2896,1,CO-50,Not medically necessary,2026-01-12,Overturned
+630,2896,2,PR-1,Deductible amount,2026-01-11,Overturned
+631,2896,3,CO-4,Modifier inconsistent with procedure,2026-01-08,Overturned
+632,2903,1,PR-1,Deductible amount,2024-05-17,Upheld
+633,2907,1,CO-97,Bundled service,2025-02-24,Not Appealed
+634,2907,2,CO-16,Missing or invalid information,2025-02-13,Not Appealed
+635,2909,1,CO-16,Missing or invalid information,2025-08-04,Upheld
+636,2913,1,CO-18,Duplicate claim,2024-10-15,Overturned
+637,2913,2,CO-18,Duplicate claim,2024-10-17,Overturned
+638,2913,3,CO-18,Duplicate claim,2024-10-02,Overturned
+639,2916,1,PR-1,Deductible amount,2024-09-21,Overturned
+640,2916,2,CO-29,Timely filing limit exceeded,2024-09-10,Overturned
+641,2922,1,CO-97,Bundled service,2025-07-10,Overturned
+642,2922,2,CO-29,Timely filing limit exceeded,2025-06-22,Overturned
+643,2931,1,CO-29,Timely filing limit exceeded,2025-06-07,Overturned
+644,2931,2,CO-18,Duplicate claim,2025-06-08,Overturned
+645,2931,3,CO-18,Duplicate claim,2025-06-11,Overturned
+646,2971,1,CO-29,Timely filing limit exceeded,2025-04-16,Upheld
+647,2971,2,CO-18,Duplicate claim,2025-04-19,Upheld
+648,2973,1,CO-29,Timely filing limit exceeded,2025-08-05,Overturned
+649,2978,1,CO-97,Bundled service,2025-11-27,Overturned
+650,2996,1,CO-16,Missing or invalid information,2025-01-31,Upheld
+651,2996,2,CO-50,Not medically necessary,2025-01-20,Upheld
+652,2996,3,CO-18,Duplicate claim,2025-01-17,Upheld
+653,3009,1,CO-50,Not medically necessary,2024-11-20,Overturned
+654,3009,2,PR-1,Deductible amount,2024-11-16,Overturned
+655,3009,3,PR-1,Deductible amount,2024-11-08,Overturned
+656,3011,1,CO-4,Modifier inconsistent with procedure,2025-05-31,Upheld
+657,3011,2,CO-4,Modifier inconsistent with procedure,2025-06-02,Upheld
+658,3011,3,PR-1,Deductible amount,2025-06-04,Upheld
+659,3012,1,CO-18,Duplicate claim,2025-03-25,Overturned
+660,3025,1,CO-18,Duplicate claim,2025-03-26,Not Appealed
+661,3025,2,PR-1,Deductible amount,2025-03-27,Not Appealed
+662,3058,1,CO-29,Timely filing limit exceeded,2024-10-17,Not Appealed
+663,3058,2,CO-50,Not medically necessary,2024-09-30,Not Appealed
+664,3060,1,CO-16,Missing or invalid information,2024-07-21,Overturned
+665,3060,2,CO-97,Bundled service,2024-07-24,Overturned
+666,3070,1,CO-16,Missing or invalid information,2024-07-04,Overturned
+667,3070,2,PR-1,Deductible amount,2024-06-12,Overturned
+668,3070,3,PR-1,Deductible amount,2024-06-13,Overturned
+669,3094,1,CO-18,Duplicate claim,2025-07-28,Overturned
+670,3097,1,CO-50,Not medically necessary,2024-09-04,Not Appealed
+671,3098,1,CO-18,Duplicate claim,2025-05-05,Overturned
+672,3102,1,CO-29,Timely filing limit exceeded,2025-11-24,Upheld
+673,3102,2,CO-18,Duplicate claim,2025-11-24,Upheld
+674,3102,3,CO-50,Not medically necessary,2025-11-28,Upheld
+675,3112,1,PR-1,Deductible amount,2025-07-28,Overturned
+676,3116,1,PR-1,Deductible amount,2025-06-15,Upheld
+677,3130,1,CO-18,Duplicate claim,2025-10-31,Not Appealed
+678,3130,2,CO-97,Bundled service,2025-11-19,Not Appealed
+679,3130,3,PR-1,Deductible amount,2025-11-19,Upheld
