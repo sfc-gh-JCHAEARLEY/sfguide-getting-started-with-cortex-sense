@@ -7,8 +7,8 @@ quickstart.
 It sets up **Juniper Valley Health**, a fictional health system, in your Snowflake account.
 Its analytics warehouse holds about 16,000 synthetic rows. Its business definitions, such as
 what counts as a clean claim, which admissions a readmission rate excludes, and what its
-internal BEACON designation requires, live where they would at a real organization: in
-internal docs, saved queries, and a dashboard. You ask an agent the same questions without
+internal BEACON designation requires, are in internal docs, saved queries, and a
+dashboard, as they would be at a real organization. You ask an agent the same questions without
 and with a Cortex Sense context over those sources, and compare the answers.
 
 Everything in this repository is synthetic. No real patient data is used.
