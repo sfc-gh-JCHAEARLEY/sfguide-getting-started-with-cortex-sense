@@ -36,10 +36,12 @@ When you're done, delete the context through Cortex Code, then run
 | `JUNIPER_ANALYST` role | Reads the `ANALYTICS` schema only. Used for the comparison |
 | `JUNIPER_WH` warehouse | XSMALL, auto-suspends after 60 seconds |
 | `JUNIPER_GITHUB` API integration | Read-only access to this public repository |
-| `JUNIPER_HEALTH.SETUP` | Git repository clone and CSV load stage |
 | `JUNIPER_HEALTH.ANALYTICS` | 8 tables and the `CLAIMS_SV` semantic view. Structure only, no business definitions |
 | `JUNIPER_HEALTH.KNOWLEDGE` | Internal docs and saved queries on `KNOWLEDGE_STAGE`, the operations dashboard, and the `CLAIMS_SV_CERTIFIED` semantic view |
 | `JUNIPER_HEALTH.SENSE` | Empty. The Cortex Sense context goes here |
+
+Setup loads everything through a temporary `SETUP` schema holding the Git repository
+clone, then drops it, because the clone includes the answer key.
 
 `JUNIPER_ANALYST` can't read `KNOWLEDGE`. That separation is what makes the comparison
 fair: without Cortex Sense, the analyst has the tables but not the definitions.

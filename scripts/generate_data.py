@@ -27,6 +27,8 @@ GOLDEN_FILE = ROOT / "evals" / "golden_values.json"
 
 START = datetime(2024, 1, 1)
 END = datetime(2025, 12, 31)
+# Inpatient stays end early enough that every readmission still falls inside the window.
+INPATIENT_END = END - timedelta(days=60)
 
 # ---------------------------------------------------------------------------
 # Facilities. Inpatient volumes are fixed per facility so the readmission,
@@ -34,7 +36,8 @@ END = datetime(2025, 12, 31)
 #   elig        adult, non-obstetric, completed inpatient admissions
 #   peds / ob   completed inpatient admissions that the house rate excludes
 #   cancelled / in_progress   inpatient encounters with no discharge
-#   readmits    unplanned readmissions on eligible index admissions
+#   readmits    unplanned readmissions within 30 days on eligible index admissions
+#   late        unplanned readmissions after 30 days on eligible index admissions
 #   planned     planned readmissions on eligible index admissions
 #   trap_ob / trap_peds   unplanned readmissions on excluded index admissions
 # ---------------------------------------------------------------------------
@@ -55,15 +58,14 @@ FACILITIES = [
 ]
 
 INPATIENT = {
-    #     elig peds  ob canc inpr readm plan trap_ob trap_peds
-    1: dict(elig=150, peds=6, ob=50, cancelled=6, in_progress=4, readmits=18, planned=6, trap_ob=22, trap_peds=2),
-    2: dict(elig=130, peds=4, ob=30, cancelled=5, in_progress=3, readmits=12, planned=5, trap_ob=15, trap_peds=0),
-    3: dict(elig=110, peds=8, ob=30, cancelled=4, in_progress=3, readmits=17, planned=4, trap_ob=13, trap_peds=2),
-    4: dict(elig=18, peds=2, ob=8, cancelled=2, in_progress=1, readmits=3, planned=1, trap_ob=3, trap_peds=0),
-    5: dict(elig=95, peds=3, ob=22, cancelled=3, in_progress=2, readmits=6, planned=3, trap_ob=10, trap_peds=0),
-    6: dict(elig=15, peds=2, ob=6, cancelled=1, in_progress=1, readmits=2, planned=1, trap_ob=2, trap_peds=0),
-    7: dict(elig=12, peds=80, ob=100, cancelled=3, in_progress=2, readmits=1, planned=1, trap_ob=36, trap_peds=24),
-    8: dict(elig=60, peds=0, ob=0, cancelled=2, in_progress=1, readmits=3, planned=3, trap_ob=0, trap_peds=0),
+    1: dict(elig=150, peds=6, ob=50, cancelled=6, in_progress=4, readmits=18, late=4, planned=6, trap_ob=22, trap_peds=2),
+    2: dict(elig=130, peds=4, ob=30, cancelled=5, in_progress=3, readmits=12, late=3, planned=5, trap_ob=15, trap_peds=0),
+    3: dict(elig=110, peds=8, ob=30, cancelled=4, in_progress=3, readmits=17, late=3, planned=4, trap_ob=13, trap_peds=2),
+    4: dict(elig=18, peds=2, ob=8, cancelled=2, in_progress=1, readmits=3, late=0, planned=1, trap_ob=3, trap_peds=0),
+    5: dict(elig=95, peds=3, ob=22, cancelled=3, in_progress=2, readmits=6, late=2, planned=3, trap_ob=10, trap_peds=0),
+    6: dict(elig=15, peds=2, ob=6, cancelled=1, in_progress=1, readmits=2, late=1, planned=1, trap_ob=2, trap_peds=0),
+    7: dict(elig=12, peds=80, ob=100, cancelled=3, in_progress=2, readmits=1, late=0, planned=1, trap_ob=36, trap_peds=24),
+    8: dict(elig=60, peds=0, ob=0, cancelled=2, in_progress=1, readmits=3, late=1, planned=3, trap_ob=0, trap_peds=0),
 }
 
 # Outpatient and emergency volume per facility.
@@ -88,7 +90,7 @@ RESUBMIT_DENIAL_DEFAULT = 0.25
 # UnitedHealthcare looks best on first-pass acceptance but is near worst once
 # denials and unpaid claims are taken into account.
 PAYERS = {
-    "UnitedHealthcare": (0.94, 0.62),
+    "UnitedHealthcare": (0.94, 0.59),
     "Aetna": (0.87, 0.80),
     "Blue Cross Blue Shield": (0.82, 0.83),
     "Cigna": (0.86, 0.81),
@@ -184,10 +186,20 @@ def main():
     by_category = defaultdict(list)   # (facility_id, category) -> [encounter]
 
     def add_encounter(fid, category, etype, status, patient_kind):
-        pid = pick_patient(patient_kind)
-        admit = rand_ts(rng, START, END)
-        if status in ("Cancelled", "In Progress"):
+        # Inpatient stays always get a new patient, so the only repeat inpatient
+        # stays in the data are the ones recorded in READMISSIONS.
+        pid = new_patient(patient_kind) if etype == "Inpatient" else pick_patient(patient_kind)
+        if status == "In Progress":
+            admit = rand_ts(rng, END - timedelta(days=6), END)
+        elif etype == "Inpatient":
+            admit = rand_ts(rng, START, INPATIENT_END)
+        else:
+            admit = rand_ts(rng, START, END)
+        if status == "In Progress":
             discharge = None
+        elif status == "Cancelled":
+            # Cancelled after registration: the source system still stamps a discharge time.
+            discharge = admit + timedelta(hours=rng.randint(1, 6))
         elif etype == "Inpatient":
             discharge = admit + timedelta(days=rng.randint(1, 7), hours=rng.randint(1, 10))
         elif etype == "Emergency":
@@ -227,7 +239,7 @@ def main():
     # sized so index and readmission encounters never overlap.
     readmissions = []
 
-    def pair_events(fid, category, n, planned):
+    def pair_events(fid, category, n, planned, days_range=(2, 29)):
         pool = [e for e in by_category[(fid, category)] if not e.get("used")]
         if len(pool) < 2 * n:
             raise SystemExit(f"facility {fid} {category}: pool {len(pool)} too small for {n} events")
@@ -235,7 +247,7 @@ def main():
         for i in range(n):
             index, readmit = pool[2 * i], pool[2 * i + 1]
             index["used"] = readmit["used"] = True
-            days = rng.randint(2, 29)
+            days = rng.randint(*days_range)
             readmit["patient_id"] = index["patient_id"]
             readmit["admit_date"] = index["discharge_date"] + timedelta(days=days, hours=rng.randint(0, 12))
             readmit["discharge_date"] = readmit["admit_date"] + timedelta(days=rng.randint(1, 6))
@@ -246,6 +258,7 @@ def main():
     for fid, spec in INPATIENT.items():
         pair_events(fid, "elig", spec["readmits"], False)
         pair_events(fid, "elig", spec["planned"], True)
+        pair_events(fid, "elig", spec["late"], False, days_range=(31, 45))
         pair_events(fid, "ob", spec["trap_ob"], False)
         pair_events(fid, "peds", spec["trap_peds"], False)
 
@@ -348,10 +361,9 @@ def main():
 
     write_csvs(patients, encounters, diagnoses, claims, denials, readmissions, surveys)
     golden = compute_answers(patients, encounters, diagnoses, claims, denials, readmissions, surveys, aco)
-    print(json.dumps(golden, indent=2))
-    check_gates(golden)
     GOLDEN_FILE.parent.mkdir(parents=True, exist_ok=True)
     GOLDEN_FILE.write_text(json.dumps(golden, indent=2) + "\n")
+    check_gates(golden)
 
 
 def write_csvs(patients, encounters, diagnoses, claims, denials, readmissions, surveys):
@@ -406,6 +418,27 @@ def compute_answers(patients, encounters, diagnoses, claims, denials, readmissio
     numerator = [r for r in readmissions if not r["is_planned"] and r["days_to_readmit"] <= 30
                  and r["index_encounter_id"] in eligible]
     unplanned_all = [r for r in readmissions if not r["is_planned"]]
+
+    # Each rule must matter: dropping it has to change the answer.
+    no_30_day = [r for r in readmissions if not r["is_planned"] and r["index_encounter_id"] in eligible]
+    with_cancelled = {e["encounter_id"] for e in inpatient if e["discharge_date"] is not None
+                      and age_at(e) >= 18 and e["encounter_id"] not in ob_encounters}
+
+    # Every repeat inpatient stay within 30 days must be recorded in READMISSIONS,
+    # and no patient can be in two inpatient stays at once.
+    recorded = {(r["index_encounter_id"], r["readmit_encounter_id"]) for r in readmissions}
+    stays = defaultdict(list)
+    for e in inpatient:
+        if e["discharge_date"] is not None and e["status"] == "Completed":
+            stays[e["patient_id"]].append(e)
+    unrecorded = overlaps = 0
+    for patient_stays in stays.values():
+        patient_stays.sort(key=lambda e: e["admit_date"])
+        for a, b in zip(patient_stays, patient_stays[1:]):
+            if b["admit_date"] < a["discharge_date"]:
+                overlaps += 1
+            elif (b["admit_date"] - a["discharge_date"]).days <= 30 and (a["encounter_id"], b["encounter_id"]) not in recorded:
+                unrecorded += 1
 
     # Per-facility readmission, denial rate and experience score.
     elig_by_fac, num_by_fac = defaultdict(int), defaultdict(int)
@@ -476,7 +509,10 @@ def compute_answers(patients, encounters, diagnoses, claims, denials, readmissio
                                  rate=pct(len(numerator), len(eligible)),
                                  inpatient_encounters=len(inpatient),
                                  naive_unplanned_rate=pct(len(unplanned_all), len(inpatient)),
-                                 naive_all_rate=pct(len(readmissions), len(inpatient))),
+                                 naive_all_rate=pct(len(readmissions), len(inpatient)),
+                                 rate_without_30_day_rule=pct(len(no_30_day), len(eligible)),
+                                 eligible_if_cancelled_kept=len(with_cancelled),
+                                 unrecorded_returns=unrecorded, overlapping_stays=overlaps),
         "beacon": dict(qualifying=[fac_names[f] for f in beacon], scorecard=scorecard),
         "tailwind": dict(hits=tw_hits, total=tw_total, rate=pct(tw_hits, tw_total),
                          all_facility_rate=pct(all_hits, all_total)),
@@ -497,13 +533,17 @@ def check_gates(g):
     gate("readmission: correct rate below 14%", r["rate"] < 14.0)
     gate("readmission: naive unplanned rate above CMS 18%", r["naive_unplanned_rate"] > 18.0)
     gate("readmission: naive vs correct gap >= 6 points", r["naive_unplanned_rate"] - r["rate"] >= 6.0)
+    gate("readmission: dropping the 30-day rule changes the rate", r["rate_without_30_day_rule"] > r["rate"])
+    gate("readmission: dropping the cancelled rule changes the denominator",
+         r["eligible_if_cancelled_kept"] > r["eligible_index_admissions"])
+    gate("readmission: every repeat stay within 30 days is recorded", r["unrecorded_returns"] == 0)
+    gate("readmission: no overlapping inpatient stays", r["overlapping_stays"] == 0)
 
     c = g["clean_claim_rate"]
     gate("clean claims: naive vs correct gap >= 20 points", c["naive_rate"] - c["rate"] >= 20.0)
     gate("clean claims: UnitedHealthcare tops the naive ranking", c["naive_by_payer"][0][0] == "UnitedHealthcare")
     correct_order = [p for p, _ in c["by_payer"]]
-    gate("clean claims: UnitedHealthcare bottom two on the correct ranking",
-         correct_order.index("UnitedHealthcare") >= len(correct_order) - 2)
+    gate("clean claims: UnitedHealthcare last on the correct ranking", correct_order[-1] == "UnitedHealthcare")
 
     b = g["beacon"]
     gate("BEACON: exactly Summit Orthopedic qualifies", b["qualifying"] == ["Summit Orthopedic Hospital"])
@@ -524,6 +564,26 @@ def check_gates(g):
 
     d = g["routine_denial_rate"]
     gate("routine denial rate: line-level count differs", d["naive_line_level_rate"] > d["rate"])
+
+    # The expected answers in evals/questions.yaml are written by hand. Make sure they
+    # still match what the data produces.
+    yaml_text = (ROOT / "evals" / "questions.yaml").read_text()
+    sc2, sc5 = sc[2], sc[5]
+    expected = [
+        f"{d['rate']}%", f"{d['denied_claims']} distinct denied claims", f"{d['total_claims']:,} claims",
+        f"{d['naive_line_level_rate']}%",
+        f"{c['rate']}% overall", f"{c['clean']:,} of {c['total']:,}", f"{c['naive_rate']}%",
+        *[f"{p} {v}" for p, v in c["by_payer"]],
+        f"{r['rate']}%", f"{r['numerator']} qualifying readmissions", f"{r['eligible_index_admissions']} eligible",
+        f"all {r['inpatient_encounters']} inpatient", f"{r['naive_unplanned_rate']}%",
+        f"readmission ({sc2['readmission_rate']}%)", f"denial rate ({sc5['denial_rate']}%)",
+        f"{t['rate']}%", f"{t['hits']:,} of {t['total']:,}", f"{t['all_facility_rate']}%",
+        f"{len(rel['suppressed'])} of the {rel['reporting_facilities']} reporting",
+    ]
+    stale = [e for e in expected if e not in yaml_text]
+    gate("evals/questions.yaml matches the data", not stale)
+    if stale:
+        print("  missing from questions.yaml:", stale)
 
     if failures:
         raise SystemExit(f"{len(failures)} gate(s) failed")

@@ -1,9 +1,9 @@
 {
   "routine_denial_rate": {
-    "denied_claims": 385,
+    "denied_claims": 379,
     "total_claims": 3131,
-    "rate": 12.3,
-    "naive_line_level_rate": 21.7
+    "rate": 12.1,
+    "naive_line_level_rate": 20.5
   },
   "routine_aco_facilities": [
     "Juniper Valley Medical Center",
@@ -13,76 +13,76 @@
     "Northgate Family Clinic"
   ],
   "clean_claim_rate": {
-    "clean": 2031,
+    "clean": 2001,
     "total": 3131,
-    "rate": 64.9,
-    "naive_rate": 87.7,
+    "rate": 63.9,
+    "naive_rate": 88.0,
     "by_payer": [
       [
-        "Cigna",
-        74.1
+        "Self-Pay",
+        72.7
       ],
       [
         "Aetna",
-        71.1
+        71.7
       ],
       [
         "Blue Cross Blue Shield",
-        68.0
+        70.9
       ],
       [
-        "Medicare",
-        65.6
-      ],
-      [
-        "Self-Pay",
-        65.4
+        "Cigna",
+        68.9
       ],
       [
         "Humana",
-        65.3
+        66.9
+      ],
+      [
+        "Medicare",
+        65.2
       ],
       [
         "Medicaid",
-        58.2
+        54.6
       ],
       [
         "UnitedHealthcare",
-        56.9
+        54.2
       ]
     ],
     "naive_by_payer": [
       [
         "UnitedHealthcare",
-        94.9
-      ],
-      [
-        "Humana",
-        90.3
-      ],
-      [
-        "Cigna",
-        90.2
+        92.5
       ],
       [
         "Medicare",
-        88.7
+        91.1
+      ],
+      [
+        "Humana",
+        90.0
       ],
       [
         "Aetna",
-        88.2
-      ],
-      [
-        "Medicaid",
-        82.4
-      ],
-      [
-        "Blue Cross Blue Shield",
-        80.0
+        87.7
       ],
       [
         "Self-Pay",
-        79.8
+        86.4
+      ],
+      [
+        "Cigna",
+        86.0
+      ],
+      [
+        "Medicaid",
+        83.2
+      ],
+      [
+        "Blue Cross Blue Shield",
+        82.4
       ]
     ]
   },
@@ -91,8 +91,12 @@
     "eligible_index_admissions": 590,
     "rate": 10.5,
     "inpatient_encounters": 984,
-    "naive_unplanned_rate": 19.4,
-    "naive_all_rate": 21.8
+    "naive_unplanned_rate": 20.8,
+    "naive_all_rate": 23.3,
+    "rate_without_30_day_rule": 12.9,
+    "eligible_if_cancelled_kept": 616,
+    "unrecorded_returns": 0,
+    "overlapping_stays": 0
   },
   "beacon": {
     "qualifying": [
@@ -101,9 +105,9 @@
     "scorecard": {
       "1": {
         "facility": "Juniper Valley Medical Center",
-        "experience_score": 81.9,
+        "experience_score": 80.8,
         "readmission_rate": 12.0,
-        "denial_rate": 15.0,
+        "denial_rate": 14.8,
         "eligible_index_admissions": 150,
         "passes": {
           "experience": false,
@@ -113,9 +117,9 @@
       },
       "2": {
         "facility": "Cedar Ridge Hospital",
-        "experience_score": 87.5,
+        "experience_score": 88.6,
         "readmission_rate": 9.2,
-        "denial_rate": 0.5,
+        "denial_rate": 0.8,
         "eligible_index_admissions": 130,
         "passes": {
           "experience": true,
@@ -125,9 +129,9 @@
       },
       "3": {
         "facility": "Riverbend Community Hospital",
-        "experience_score": 76.9,
+        "experience_score": 79.3,
         "readmission_rate": 15.5,
-        "denial_rate": 17.5,
+        "denial_rate": 15.8,
         "eligible_index_admissions": 110,
         "passes": {
           "experience": false,
@@ -137,9 +141,9 @@
       },
       "4": {
         "facility": "Granite Falls Hospital",
-        "experience_score": 80.9,
+        "experience_score": 78.3,
         "readmission_rate": 16.7,
-        "denial_rate": 19.6,
+        "denial_rate": 21.0,
         "eligible_index_admissions": 18,
         "passes": {
           "experience": false,
@@ -149,9 +153,9 @@
       },
       "5": {
         "facility": "Willow Creek Hospital",
-        "experience_score": 90.3,
+        "experience_score": 90.8,
         "readmission_rate": 6.3,
-        "denial_rate": 21.0,
+        "denial_rate": 23.0,
         "eligible_index_admissions": 95,
         "passes": {
           "experience": true,
@@ -161,9 +165,9 @@
       },
       "6": {
         "facility": "Sagebrush Regional Hospital",
-        "experience_score": 76.4,
+        "experience_score": 76.2,
         "readmission_rate": 13.3,
-        "denial_rate": 12.8,
+        "denial_rate": 11.3,
         "eligible_index_admissions": 15,
         "passes": {
           "experience": false,
@@ -173,9 +177,9 @@
       },
       "7": {
         "facility": "Juniper Valley Women's and Children's Hospital",
-        "experience_score": 86.9,
+        "experience_score": 85.7,
         "readmission_rate": 8.3,
-        "denial_rate": 6.2,
+        "denial_rate": 4.3,
         "eligible_index_admissions": 12,
         "passes": {
           "experience": true,
@@ -198,10 +202,10 @@
     }
   },
   "tailwind": {
-    "hits": 1150,
+    "hits": 1175,
     "total": 1500,
-    "rate": 76.7,
-    "all_facility_rate": 48.9
+    "rate": 78.3,
+    "all_facility_rate": 49.7
   },
   "release": {
     "reporting_facilities": 8,

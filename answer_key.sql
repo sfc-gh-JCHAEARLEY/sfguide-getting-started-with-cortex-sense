@@ -11,7 +11,7 @@ USE ROLE JUNIPER_BUILDER;
 USE WAREHOUSE JUNIPER_WH;
 USE SCHEMA JUNIPER_HEALTH.ANALYTICS;
 
--- Routine: overall denial rate. Expect 12.3% (385 of 3,131).
+-- Routine: overall denial rate. Expect 12.1% (379 of 3,131).
 SELECT COUNT(DISTINCT d.claim_id) AS denied_claims,
        COUNT(DISTINCT c.claim_id) AS total_claims,
        ROUND(100 * denied_claims / total_claims, 1) AS denial_rate_pct
@@ -21,7 +21,7 @@ LEFT JOIN DENIALS d ON d.claim_id = c.claim_id;
 -- Routine: ACO facilities. Expect five.
 SELECT facility_name FROM FACILITIES WHERE is_aco_participant ORDER BY facility_id;
 
--- Q1: Clean claim rate. Expect 64.9% (2,031 of 3,131), UnitedHealthcare last.
+-- Q1: Clean claim rate. Expect 63.9% (2,001 of 3,131), UnitedHealthcare last.
 WITH denied AS (SELECT DISTINCT claim_id FROM DENIALS)
 SELECT COALESCE(c.payer_name, 'All payers') AS payer,
        COUNT(*) AS total_claims,
@@ -105,9 +105,9 @@ JOIN exp ON exp.facility_id = readm.facility_id
 JOIN den ON den.facility_id = readm.facility_id
 ORDER BY f.facility_id;
 
--- Q4: Tailwind rate. Expect 76.7% (1,150 of 1,500) at ACO facilities, against an 80%
--- target. Across all facilities the same calculation gives 48.9%.
-SELECT IFF(f.is_aco_participant, 'ACO facilities (in scope)', 'Non-ACO facilities') AS scope,
+-- Q4: Tailwind rate. Expect 78.3% (1,175 of 1,500) at ACO facilities, against an 80%
+-- target. Across all facilities the same calculation gives 49.7%.
+SELECT COALESCE(IFF(f.is_aco_participant, 'ACO facilities (in scope)', 'Non-ACO facilities'), 'All facilities') AS scope,
        COUNT(*) AS claims,
        COUNT_IF(DATEDIFF('hour', e.discharge_date, c.submitted_date) <= 24) AS within_24_hours,
        ROUND(100 * within_24_hours / claims, 1) AS rate_pct
@@ -115,5 +115,5 @@ FROM CLAIMS c
 JOIN ENCOUNTERS e ON e.encounter_id = c.encounter_id
 JOIN FACILITIES f ON f.facility_id = e.facility_id
 WHERE e.status = 'Completed' AND e.discharge_date IS NOT NULL
-GROUP BY ROLLUP (scope)
-ORDER BY scope NULLS LAST;
+GROUP BY ROLLUP (f.is_aco_participant)
+ORDER BY f.is_aco_participant DESC NULLS LAST;

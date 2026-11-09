@@ -6,14 +6,17 @@
 -- definitions live. Everything is synthetic.
 --
 -- Run the whole script in a Snowsight SQL worksheet as a user who can use
--- ACCOUNTADMIN. It is safe to re-run.
+-- ACCOUNTADMIN. It is safe to re-run before you build the Cortex Sense context.
+-- After that, re-running replaces the tables, views, and dashboard the context
+-- indexed, so rebuild the context if you do.
 --
 -- Creates:
 --   roles        JUNIPER_BUILDER (owns everything, builds the context)
 --                JUNIPER_ANALYST (reads the ANALYTICS schema only)
 --   warehouse    JUNIPER_WH (XSMALL)
 --   integration  JUNIPER_GITHUB (read-only access to this public GitHub repo)
---   database     JUNIPER_HEALTH with schemas SETUP, ANALYTICS, KNOWLEDGE, SENSE
+--   database     JUNIPER_HEALTH with schemas ANALYTICS, KNOWLEDGE, and SENSE
+--                (a temporary SETUP schema is dropped at the end)
 -- =============================================================================
 
 
@@ -153,7 +156,7 @@ CREATE OR REPLACE TABLE ANALYTICS.READMISSIONS (
   readmit_encounter_id  NUMBER  COMMENT 'The later encounter. References ENCOUNTERS',
   days_to_readmit       NUMBER  COMMENT 'Days from index discharge to readmission',
   is_planned            BOOLEAN COMMENT 'TRUE when the readmission was scheduled in advance'
-) COMMENT = 'One row per readmission event, recorded against every inpatient index encounter';
+) COMMENT = 'One row per repeat inpatient stay, linked to the earlier inpatient stay it followed';
 
 CREATE OR REPLACE TABLE ANALYTICS.PATIENT_SURVEYS (
   survey_id       NUMBER COMMENT 'Survey identifier',
@@ -172,8 +175,7 @@ COPY INTO ANALYTICS.DENIALS         FROM @SETUP.CSV_STAGE FILES = ('denials.csv'
 COPY INTO ANALYTICS.READMISSIONS    FROM @SETUP.CSV_STAGE FILES = ('readmissions.csv')    FILE_FORMAT = (FORMAT_NAME = SETUP.CSV_FORMAT);
 COPY INTO ANALYTICS.PATIENT_SURVEYS FROM @SETUP.CSV_STAGE FILES = ('patient_surveys.csv') FILE_FORMAT = (FORMAT_NAME = SETUP.CSV_FORMAT);
 
--- The semantic view analysts use today. Its clean_claims metric checks first-pass
--- acceptance only.
+-- The semantic view analysts use today.
 CREATE OR REPLACE SEMANTIC VIEW ANALYTICS.CLAIMS_SV
   TABLES (
     claims AS ANALYTICS.CLAIMS PRIMARY KEY (claim_id)
@@ -307,18 +309,25 @@ GRANT SELECT ON SEMANTIC VIEW JUNIPER_HEALTH.ANALYTICS.CLAIMS_SV TO ROLE JUNIPER
 
 
 -- -----------------------------------------------------------------------------
--- Step 6: Check the load. Every row should say PASS.
+-- Step 6: Remove the setup plumbing
+-- The Git clone includes the answer key, so it doesn't stay in the account.
+-- -----------------------------------------------------------------------------
+DROP SCHEMA IF EXISTS SETUP CASCADE;
+
+
+-- -----------------------------------------------------------------------------
+-- Step 7: Check the load. Every row should say PASS.
 -- -----------------------------------------------------------------------------
 SELECT check_name, expected, actual, IFF(expected = actual, 'PASS', 'FAIL') AS result
 FROM (
             SELECT 'facilities rows'            AS check_name, 12   AS expected, (SELECT COUNT(*) FROM ANALYTICS.FACILITIES) AS actual
-  UNION ALL SELECT 'patients rows',              1720, (SELECT COUNT(*) FROM ANALYTICS.PATIENTS)
+  UNION ALL SELECT 'patients rows',              2043, (SELECT COUNT(*) FROM ANALYTICS.PATIENTS)
   UNION ALL SELECT 'encounters rows',            3174, (SELECT COUNT(*) FROM ANALYTICS.ENCOUNTERS)
-  UNION ALL SELECT 'diagnoses rows',             6074, (SELECT COUNT(*) FROM ANALYTICS.DIAGNOSES)
+  UNION ALL SELECT 'diagnoses rows',             6091, (SELECT COUNT(*) FROM ANALYTICS.DIAGNOSES)
   UNION ALL SELECT 'claims rows',                3131, (SELECT COUNT(*) FROM ANALYTICS.CLAIMS)
-  UNION ALL SELECT 'denials rows',               679,  (SELECT COUNT(*) FROM ANALYTICS.DENIALS)
-  UNION ALL SELECT 'readmissions rows',          215,  (SELECT COUNT(*) FROM ANALYTICS.READMISSIONS)
-  UNION ALL SELECT 'patient_surveys rows',       1131, (SELECT COUNT(*) FROM ANALYTICS.PATIENT_SURVEYS)
+  UNION ALL SELECT 'denials rows',               643,  (SELECT COUNT(*) FROM ANALYTICS.DENIALS)
+  UNION ALL SELECT 'readmissions rows',          229,  (SELECT COUNT(*) FROM ANALYTICS.READMISSIONS)
+  UNION ALL SELECT 'patient_surveys rows',       1109, (SELECT COUNT(*) FROM ANALYTICS.PATIENT_SURVEYS)
   UNION ALL SELECT 'knowledge docs on stage',    4,    (SELECT COUNT(*) FROM DIRECTORY(@KNOWLEDGE.KNOWLEDGE_STAGE) WHERE relative_path LIKE 'markdown/%')
   UNION ALL SELECT 'saved queries on stage',     4,    (SELECT COUNT(*) FROM DIRECTORY(@KNOWLEDGE.KNOWLEDGE_STAGE) WHERE relative_path LIKE 'query-history/%')
   UNION ALL SELECT 'dashboard source on stage',  1,    (SELECT COUNT(*) FROM DIRECTORY(@KNOWLEDGE.STREAMLIT_STAGE))
