@@ -13,8 +13,8 @@ and with a Cortex Sense context over those sources, and compare the answers.
 
 Everything in this repository is synthetic. No real patient data is used.
 
-> Cortex Sense is in private preview. Your account must be enrolled before `setup.sql`
-> will run. Contact your account team if it isn't.
+> Cortex Sense is in private preview. `setup.sql` runs in any account, but building the
+> context requires an enrolled account. Contact your account team if yours isn't.
 
 ## Quick start
 
