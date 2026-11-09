@@ -107,7 +107,8 @@ ORDER BY f.facility_id;
 
 -- Q4: Tailwind rate. Expect 78.3% (1,175 of 1,500) at ACO facilities, against an 80%
 -- target. Across all facilities the same calculation gives 49.7%.
-SELECT COALESCE(IFF(f.is_aco_participant, 'ACO facilities (in scope)', 'Non-ACO facilities'), 'All facilities') AS scope,
+SELECT IFF(GROUPING(f.is_aco_participant) = 1, 'All facilities',
+           IFF(f.is_aco_participant, 'ACO facilities (in scope)', 'Non-ACO facilities')) AS scope,
        COUNT(*) AS claims,
        COUNT_IF(DATEDIFF('hour', e.discharge_date, c.submitted_date) <= 24) AS within_24_hours,
        ROUND(100 * within_24_hours / claims, 1) AS rate_pct
@@ -116,4 +117,4 @@ JOIN ENCOUNTERS e ON e.encounter_id = c.encounter_id
 JOIN FACILITIES f ON f.facility_id = e.facility_id
 WHERE e.status = 'Completed' AND e.discharge_date IS NOT NULL
 GROUP BY ROLLUP (f.is_aco_participant)
-ORDER BY f.is_aco_participant DESC NULLS LAST;
+ORDER BY GROUPING(f.is_aco_participant), f.is_aco_participant DESC;
