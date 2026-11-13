@@ -51,7 +51,7 @@ GRANT USAGE ON WAREHOUSE JUNIPER_WH TO ROLE JUNIPER_ANALYST;
 
 CREATE API INTEGRATION IF NOT EXISTS JUNIPER_GITHUB
   API_PROVIDER = git_https_api
-  API_ALLOWED_PREFIXES = ('https://github.com/sfc-gh-JCHAEARLEY/sfguide-getting-started-with-cortex-sense')
+  API_ALLOWED_PREFIXES = ('https://github.com/sfc-gh-JCHAEARLEY/sfguide-getting-started-with-cortex-sense.git')
   ENABLED = TRUE;
 GRANT USAGE ON INTEGRATION JUNIPER_GITHUB TO ROLE JUNIPER_BUILDER;
 
