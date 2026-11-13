@@ -36,7 +36,7 @@ When you're done, delete the context through Cortex Code, then run
 | `JUNIPER_ANALYST` role | Reads the `ANALYTICS` schema only. Used for the comparison |
 | `JUNIPER_WH` warehouse | XSMALL, auto-suspends after 60 seconds |
 | `JUNIPER_GITHUB` API integration | Read-only access to this public repository |
-| `JUNIPER_HEALTH.ANALYTICS` | 8 tables and the `CLAIMS_SV` semantic view. Structure only, no business definitions |
+| `JUNIPER_HEALTH.ANALYTICS` | 8 tables and the `CLAIMS_SV` semantic view. Structure only, no current business definitions |
 | `JUNIPER_HEALTH.KNOWLEDGE` | Internal docs and saved queries on `KNOWLEDGE_STAGE`, the operations dashboard, and the `CLAIMS_SV_CERTIFIED` semantic view |
 | `JUNIPER_HEALTH.SENSE` | Empty. The Cortex Sense context goes here |
 

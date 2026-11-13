@@ -26,7 +26,7 @@ questions:
   - id: q2
     kind: needs_definition
     question: "Show me our 30-day readmission rate"
-    expected_answer: "10.5%: 62 qualifying readmissions over 590 eligible index admissions, below the CMS 18% threshold. Base population is inpatient encounters that aren't cancelled and have a discharge date; patients under 18 and obstetric admissions (any ICD-10 code starting with O) are excluded from the denominator; the numerator counts only unplanned readmissions within 30 days whose index admission is eligible. Dropping the 30-day rule gives 12.9%. Unplanned readmissions over all 984 inpatient encounters gives 20.8%, which wrongly crosses the CMS threshold."
+    expected_answer: "10.5%: 62 qualifying readmissions over 590 eligible index admissions, below the CMS 18% threshold. Base population is inpatient encounters that aren't cancelled and have a discharge date; patients under 18 and obstetric admissions (any ICD-10 code starting with O) are excluded from the denominator; the numerator counts only unplanned readmissions within 30 days whose index admission is eligible. Dropping the 30-day rule gives 12.9%. Unplanned readmissions within 30 days over completed inpatient stays gives 20.3% (191 of 941), and over all 984 inpatient encounters gives 20.8%, which wrongly crosses the CMS threshold."
     source: knowledge/docs/Metrics_Glossary.md
 
   - id: q3
