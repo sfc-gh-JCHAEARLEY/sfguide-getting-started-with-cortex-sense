@@ -2,7 +2,7 @@
 -- Getting Started with Cortex Sense: teardown
 --
 -- Before running this, delete the Cortex Sense context. In CoCo, ask:
---   Delete the juniper_health Cortex Sense context in JUNIPER_HEALTH.SENSE.
+--   Delete the JUNIPER_HEALTH Cortex Sense context in JUNIPER_HEALTH.SENSE.
 --
 -- Then run this whole script in a Snowsight SQL worksheet.
 -- =============================================================================
