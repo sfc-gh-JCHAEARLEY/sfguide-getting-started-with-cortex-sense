@@ -5,7 +5,8 @@
 --   Delete the JUNIPER_HEALTH Cortex Sense context in JUNIPER_HEALTH.SENSE.
 --
 -- Then run this whole script in a Snowsight SQL worksheet. If an administrator ran
--- admin_setup.sql for you, run Part 1 yourself and send them Part 2.
+-- admin_setup.sql for you, run Part 1 yourself, then send them Part 2. Run Part 1
+-- first: once Part 2 drops JUNIPER_BUILDER, you can no longer drop the database.
 -- =============================================================================
 
 -- Part 1: JUNIPER_BUILDER owns the database, so it drops it.

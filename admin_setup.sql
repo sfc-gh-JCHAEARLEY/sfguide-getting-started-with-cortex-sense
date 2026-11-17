@@ -16,8 +16,12 @@
 USE ROLE ACCOUNTADMIN;
 
 -- The user who will run the quickstart. Running it for yourself? Leave this as is.
--- Running it for someone else? Replace CURRENT_USER() with their user name in
--- quotes, for example SET quickstart_user = 'JDOE';
+-- Running it for someone else? Replace CURRENT_USER() with the name that
+-- SELECT CURRENT_USER() returns for them, in single quotes:
+--   SET quickstart_user = 'JDOE';
+-- If the name contains characters such as @ or ., also wrap it in double quotes
+-- and match its case exactly:
+--   SET quickstart_user = '"jdoe@company.com"';
 SET quickstart_user = CURRENT_USER();
 
 CREATE ROLE IF NOT EXISTS JUNIPER_BUILDER
