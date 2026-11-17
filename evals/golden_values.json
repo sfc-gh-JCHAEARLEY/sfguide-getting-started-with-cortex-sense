@@ -109,6 +109,7 @@
         "readmission_rate": 12.0,
         "denial_rate": 14.8,
         "eligible_index_admissions": 150,
+        "qualifying_readmissions": 18,
         "passes": {
           "experience": false,
           "readmission": false,
@@ -121,6 +122,7 @@
         "readmission_rate": 9.2,
         "denial_rate": 0.8,
         "eligible_index_admissions": 130,
+        "qualifying_readmissions": 12,
         "passes": {
           "experience": true,
           "readmission": false,
@@ -133,6 +135,7 @@
         "readmission_rate": 15.5,
         "denial_rate": 15.8,
         "eligible_index_admissions": 110,
+        "qualifying_readmissions": 17,
         "passes": {
           "experience": false,
           "readmission": false,
@@ -145,6 +148,7 @@
         "readmission_rate": 16.7,
         "denial_rate": 21.0,
         "eligible_index_admissions": 18,
+        "qualifying_readmissions": 3,
         "passes": {
           "experience": false,
           "readmission": false,
@@ -157,6 +161,7 @@
         "readmission_rate": 6.3,
         "denial_rate": 23.0,
         "eligible_index_admissions": 95,
+        "qualifying_readmissions": 6,
         "passes": {
           "experience": true,
           "readmission": true,
@@ -169,6 +174,7 @@
         "readmission_rate": 13.3,
         "denial_rate": 11.3,
         "eligible_index_admissions": 15,
+        "qualifying_readmissions": 2,
         "passes": {
           "experience": false,
           "readmission": false,
@@ -181,6 +187,7 @@
         "readmission_rate": 8.3,
         "denial_rate": 4.3,
         "eligible_index_admissions": 12,
+        "qualifying_readmissions": 1,
         "passes": {
           "experience": true,
           "readmission": false,
@@ -193,6 +200,7 @@
         "readmission_rate": 5.0,
         "denial_rate": 0.0,
         "eligible_index_admissions": 60,
+        "qualifying_readmissions": 3,
         "passes": {
           "experience": true,
           "readmission": true,
@@ -205,7 +213,34 @@
     "hits": 1175,
     "total": 1500,
     "rate": 78.3,
-    "all_facility_rate": 49.7
+    "all_facility_rate": 49.7,
+    "by_facility": {
+      "Juniper Valley Medical Center": {
+        "hits": 340,
+        "total": 426,
+        "rate": 79.8
+      },
+      "Cedar Ridge Hospital": {
+        "hits": 284,
+        "total": 364,
+        "rate": 78.0
+      },
+      "Willow Creek Hospital": {
+        "hits": 241,
+        "total": 300,
+        "rate": 80.3
+      },
+      "Summit Orthopedic Hospital": {
+        "hits": 115,
+        "total": 150,
+        "rate": 76.7
+      },
+      "Northgate Family Clinic": {
+        "hits": 195,
+        "total": 260,
+        "rate": 75.0
+      }
+    }
   },
   "release": {
     "reporting_facilities": 8,
@@ -214,5 +249,108 @@
       "Sagebrush Regional Hospital",
       "Juniper Valley Women's and Children's Hospital"
     ]
+  },
+  "routine_payments": {
+    "billed": 27260450.7,
+    "paid": 15928105.87,
+    "paid_share": 58.4,
+    "claims_by_payer": [
+      [
+        "Medicare",
+        798
+      ],
+      [
+        "UnitedHealthcare",
+        576
+      ],
+      [
+        "Blue Cross Blue Shield",
+        443
+      ],
+      [
+        "Medicaid",
+        434
+      ],
+      [
+        "Aetna",
+        382
+      ],
+      [
+        "Cigna",
+        228
+      ],
+      [
+        "Humana",
+        160
+      ],
+      [
+        "Self-Pay",
+        110
+      ]
+    ]
+  },
+  "experience_score": {
+    "system": 83.6,
+    "raw_average": 8.36,
+    "by_facility": [
+      [
+        "Summit Orthopedic Hospital",
+        91.9
+      ],
+      [
+        "Willow Creek Hospital",
+        90.8
+      ],
+      [
+        "Cedar Ridge Hospital",
+        88.6
+      ],
+      [
+        "Juniper Valley Women's and Children's Hospital",
+        85.7
+      ],
+      [
+        "Northgate Family Clinic",
+        84.8
+      ],
+      [
+        "Pinehurst Clinic",
+        83.9
+      ],
+      [
+        "Lakeside Clinic",
+        81.1
+      ],
+      [
+        "Mesa Primary Care",
+        80.9
+      ],
+      [
+        "Juniper Valley Medical Center",
+        80.8
+      ],
+      [
+        "Riverbend Community Hospital",
+        79.3
+      ],
+      [
+        "Granite Falls Hospital",
+        78.3
+      ],
+      [
+        "Sagebrush Regional Hospital",
+        76.2
+      ]
+    ]
+  },
+  "naive_readmission_by_facility": {
+    "Juniper Valley Medical Center": 19.4,
+    "Cedar Ridge Hospital": 15.7,
+    "Riverbend Community Hospital": 20.6,
+    "Granite Falls Hospital": 19.4,
+    "Willow Creek Hospital": 12.8,
+    "Sagebrush Regional Hospital": 16.0,
+    "Juniper Valley Women's and Children's Hospital": 31.0,
+    "Summit Orthopedic Hospital": 4.8
   }
 }

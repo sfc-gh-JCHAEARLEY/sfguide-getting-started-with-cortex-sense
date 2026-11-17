@@ -13,22 +13,26 @@ and with a Cortex Sense context over those sources, and compare the answers.
 
 Everything in this repository is synthetic. No real patient data is used.
 
-> Cortex Sense is in private preview. `setup.sql` runs in any account, but building the
-> context requires an enrolled account. Contact your account team if yours isn't.
+> Cortex Sense is in private preview. The setup scripts run in any account, but building
+> the context requires an enrolled account. Contact your account team if yours isn't.
 
 ## Quick start
 
-1. Open a Snowsight SQL worksheet as a user who can use `ACCOUNTADMIN`.
-2. Paste in [`setup.sql`](setup.sql) and run all of it. It loads everything directly from
-   this repository through Snowflake's Git integration, so there's nothing to clone or
-   install.
+1. Run [`admin_setup.sql`](admin_setup.sql) in a Snowsight SQL worksheet as
+   `ACCOUNTADMIN`. It creates the two demo roles, the warehouse, the Git integration, and
+   an empty database, and grants the Cortex Sense builder role. If you aren't an
+   administrator, send it to one: they set `quickstart_user` to your user name and run it
+   for you.
+2. Run [`setup.sql`](setup.sql) as yourself. It runs entirely as `JUNIPER_BUILDER` and
+   loads everything directly from this repository through Snowflake's Git integration, so
+   there's nothing to clone or install.
 3. Check that every row in the final result says `PASS`.
 4. Follow the quickstart to build the Cortex Sense context and compare answers.
 
 When you're done, delete the context through Cortex Code, then run
-[`teardown.sql`](teardown.sql).
+[`teardown.sql`](teardown.sql). Its second part needs `ACCOUNTADMIN`.
 
-## What setup creates
+## What the setup scripts create
 
 | Object | Purpose |
 |---|---|
@@ -49,29 +53,32 @@ fair: without Cortex Sense, the analyst has the tables but not the definitions.
 ## Repository layout
 
 ```
-setup.sql                     one-shot setup, run in Snowsight
-teardown.sql                  removes everything setup created
+admin_setup.sql               account-level setup, run once as ACCOUNTADMIN
+setup.sql                     loads the demo, runs as JUNIPER_BUILDER
+teardown.sql                  removes everything both scripts created
 answer_key.sql                correct answers, computed from the base tables
 data/                         8 CSVs loaded into ANALYTICS
 knowledge/docs/               internal docs uploaded to KNOWLEDGE_STAGE/markdown/
 knowledge/query-history/      saved queries uploaded to KNOWLEDGE_STAGE/query-history/
 streamlit/streamlit_app.py    the operations dashboard
-evals/questions.yaml          the 7 questions and their expected answers
+evals/questions.yaml          the 18 questions and their expected answers
 evals/golden_values.json      expected answers written by the generator
 scripts/generate_data.py      deterministic data generator
 ```
 
 ## The questions
 
-| Question | Needs a definition from |
+[`evals/questions.yaml`](evals/questions.yaml) has 18 questions. Four are routine: the
+schema alone answers them, so they check that the agent can query the data at all. The
+other 14 need a definition, program rule, or policy from one of the four docs:
+
+| Doc | Questions |
 |---|---|
-| What is our overall denial rate? | Nothing. The schema is enough |
-| Which facilities participate in the ACO? | Nothing. The schema is enough |
-| What's our clean claim rate by payer? | `Metrics_Glossary.md` |
-| Show me our 30-day readmission rate | `Metrics_Glossary.md` |
-| Which facilities have the BEACON designation? | `BEACON_Facility_Designation.md` |
-| What's our Tailwind rate? | `Project_Tailwind.md` |
-| Can I send facility-level readmission rates to an external partner? | `External_Data_Release_Policy.md` |
+| None, the schema is enough | Denial rate, ACO facilities, share of charges paid, top payer by claims |
+| `Metrics_Glossary.md` | Clean claim rate by payer, 30-day readmission rate, Experience Score by facility, facilities above the CMS threshold, highest readmission rate |
+| `BEACON_Facility_Designation.md` | BEACON facilities, closest to BEACON, why a clinic isn't on the scorecard |
+| `Project_Tailwind.md` | Tailwind rate, Tailwind rate by facility |
+| `External_Data_Release_Policy.md` | Sending readmission rates to a partner, the small-cell threshold, whether a BAA covers a release, how to get approval |
 
 Expected answers are in [`evals/questions.yaml`](evals/questions.yaml).
 
@@ -90,7 +97,8 @@ separating a guessed answer from the defined one. For example, the naive readmis
 must stay above the CMS 18% threshold while the correct rate stays well below it.
 
 If you change the data, update the expected row counts at the end of `setup.sql` and the
-answers in `evals/questions.yaml`.
+answers in `evals/questions.yaml`. The last gate fails if any number in
+`evals/questions.yaml` no longer matches the data.
 
 ## License
 

@@ -464,6 +464,7 @@ def compute_answers(patients, encounters, diagnoses, claims, denials, readmissio
         denial = pct(denied_by_fac[fid], claims_by_fac[fid])
         scorecard[fid] = dict(facility=fac_names[fid], experience_score=exp, readmission_rate=readm,
                               denial_rate=denial, eligible_index_admissions=elig_by_fac[fid],
+                              qualifying_readmissions=num_by_fac[fid],
                               passes=dict(experience=exp >= 85, readmission=readm < 8.0, denial=denial < 4.0))
     beacon = [fid for fid, s in scorecard.items() if all(s["passes"].values())]
 
@@ -492,9 +493,32 @@ def compute_answers(patients, encounters, diagnoses, claims, denials, readmissio
 
     tw_hits, tw_total = tailwind(aco)
     all_hits, all_total = tailwind({f[0] for f in FACILITIES})
+    tw_by_fac = {}
+    for fid in sorted(aco):
+        hits, total = tailwind({fid})
+        tw_by_fac[fac_names[fid]] = dict(hits=hits, total=total, rate=pct(hits, total))
 
     reporting = sorted(scorecard)
     suppressed = [fid for fid in reporting if elig_by_fac[fid] < 20]
+
+    # Routine: payment share and claim volume by payer.
+    billed = sum(c["billed_amount"] for c in claims)
+    paid = sum(c["paid_amount"] for c in claims)
+    payer_volume = sorted(payer_tot.items(), key=lambda x: -x[1])
+
+    # Experience Score for every facility, and the raw 1-10 average it's easy to report instead.
+    all_ratings = [s["overall_rating"] for s in surveys]
+    experience_by_fac = sorted(((fac_names[fid], round(10.0 * sum(r) / len(r), 1)) for fid, r in ratings.items()),
+                               key=lambda x: -x[1])
+
+    # Readmission rate per facility the naive way: unplanned within 30 days over all inpatient stays.
+    inpatient_by_fac, naive_num_by_fac = defaultdict(int), defaultdict(int)
+    for e in inpatient:
+        inpatient_by_fac[e["facility_id"]] += 1
+    for r in readmissions:
+        if not r["is_planned"] and r["days_to_readmit"] <= 30:
+            naive_num_by_fac[enc_by_id[r["index_encounter_id"]]["facility_id"]] += 1
+    naive_by_fac = {fac_names[f]: pct(naive_num_by_fac[f], n) for f, n in inpatient_by_fac.items()}
 
     return {
         "routine_denial_rate": dict(denied_claims=len(denied_claims), total_claims=len(claims),
@@ -515,9 +539,18 @@ def compute_answers(patients, encounters, diagnoses, claims, denials, readmissio
                                  unrecorded_returns=unrecorded, overlapping_stays=overlaps),
         "beacon": dict(qualifying=[fac_names[f] for f in beacon], scorecard=scorecard),
         "tailwind": dict(hits=tw_hits, total=tw_total, rate=pct(tw_hits, tw_total),
-                         all_facility_rate=pct(all_hits, all_total)),
+                         all_facility_rate=pct(all_hits, all_total), by_facility=tw_by_fac),
         "release": dict(reporting_facilities=len(reporting), suppressed=[fac_names[f] for f in suppressed]),
+        "routine_payments": dict(billed=round(billed, 2), paid=round(paid, 2), paid_share=pct(paid, billed),
+                                 claims_by_payer=payer_volume),
+        "experience_score": dict(system=round(10.0 * sum(all_ratings) / len(all_ratings), 1),
+                                 raw_average=round(sum(all_ratings) / len(all_ratings), 2),
+                                 by_facility=experience_by_fac),
+        "naive_readmission_by_facility": naive_by_fac,
     }
+
+
+NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
 
 
 def check_gates(g):
@@ -565,10 +598,25 @@ def check_gates(g):
     d = g["routine_denial_rate"]
     gate("routine denial rate: line-level count differs", d["naive_line_level_rate"] > d["rate"])
 
+    house_by_fac = {s["facility"]: s["readmission_rate"] for s in sc.values()}
+    naive_by_fac = g["naive_readmission_by_facility"]
+    house_top = max(house_by_fac, key=house_by_fac.get)
+    gate("readmission by facility: none above CMS 18% on the house rate", max(house_by_fac.values()) < 18.0)
+    gate("readmission by facility: naive rate puts several above 18%",
+         sum(v > 18.0 for v in naive_by_fac.values()) >= 2)
+    gate("readmission by facility: house and naive disagree on the highest",
+         house_top != max(naive_by_fac, key=naive_by_fac.get))
+    tw_fac = t["by_facility"]
+    gate("Tailwind by facility: exactly one ACO facility at the 80% target",
+         sum(v["rate"] >= 80.0 for v in tw_fac.values()) == 1)
+
     # The expected answers in evals/questions.yaml are written by hand. Make sure they
     # still match what the data produces.
     yaml_text = (ROOT / "evals" / "questions.yaml").read_text()
     sc2, sc5 = sc[2], sc[5]
+    pay, exp = g["routine_payments"], g["experience_score"]
+    second_house = sorted(sc.values(), key=lambda s: -s["readmission_rate"])[1]
+    top_house = sc[next(k for k, s in sc.items() if s["facility"] == house_top)]
     expected = [
         f"{d['rate']}%", f"{d['denied_claims']} distinct denied claims", f"{d['total_claims']:,} claims",
         f"{d['naive_line_level_rate']}%",
@@ -579,6 +627,18 @@ def check_gates(g):
         f"readmission ({sc2['readmission_rate']}%)", f"denial rate ({sc5['denial_rate']}%)",
         f"{t['rate']}%", f"{t['hits']:,} of {t['total']:,}", f"{t['all_facility_rate']}%",
         f"{len(rel['suppressed'])} of the {rel['reporting_facilities']} reporting",
+        f"{pay['paid_share']}%: ${pay['paid'] / 1e6:.2f}M paid of ${pay['billed'] / 1e6:.2f}M billed",
+        "{}, with {} of {:,} claims, followed by {} with {}".format(
+            pay["claims_by_payer"][0][0], pay["claims_by_payer"][0][1], d["total_claims"],
+            pay["claims_by_payer"][1][0], pay["claims_by_payer"][1][1]),
+        f"{exp['system']} system-wide", f"({exp['raw_average']} system-wide)",
+        *[f"{f} {v}" for f, v in exp["by_facility"]],
+        *[f"{f} {v['rate']}% ({v['hits']} of {v['total']})" for f, v in tw_fac.items()],
+        f"{house_top} at {top_house['readmission_rate']}% ({top_house['qualifying_readmissions']} of "
+        f"{top_house['eligible_index_admissions']} eligible",
+        f"{second_house['facility']} at {second_house['readmission_rate']}% ({second_house['qualifying_readmissions']} of "
+        f"{second_house['eligible_index_admissions']})",
+        f"puts {NUMBER_WORDS[sum(v > 18.0 for v in naive_by_fac.values())]} facilities over 18%",
     ]
     stale = [e for e in expected if e not in yaml_text]
     gate("evals/questions.yaml matches the data", not stale)

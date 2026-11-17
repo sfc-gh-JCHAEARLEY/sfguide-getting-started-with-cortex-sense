@@ -5,62 +5,21 @@
 -- warehouse, plus the internal docs, saved queries, and dashboard where its business
 -- definitions live. Everything is synthetic.
 --
--- Run the whole script in a Snowsight SQL worksheet as a user who can use
--- ACCOUNTADMIN. It is safe to re-run before you build the Cortex Sense context.
--- After that, re-running replaces the tables, views, and dashboard the context
--- indexed, so rebuild the context if you do.
+-- Run admin_setup.sql first (it needs ACCOUNTADMIN). Then run this whole script in
+-- a Snowsight SQL worksheet. It runs entirely as JUNIPER_BUILDER.
 --
--- Creates:
---   roles        JUNIPER_BUILDER (owns everything, builds the context)
---                JUNIPER_ANALYST (reads the ANALYTICS schema only)
---   warehouse    JUNIPER_WH (XSMALL)
---   integration  JUNIPER_GITHUB (read-only access to this public GitHub repo)
---   database     JUNIPER_HEALTH with schemas ANALYTICS, KNOWLEDGE, and SENSE
+-- It is safe to re-run before you build the Cortex Sense context. After that,
+-- re-running replaces the tables, views, and dashboard the context indexed, so
+-- rebuild the context if you do.
+--
+-- Creates, in JUNIPER_HEALTH:
+--   schemas      ANALYTICS, KNOWLEDGE, and SENSE
 --                (a temporary SETUP schema is dropped at the end)
 -- =============================================================================
 
 
 -- -----------------------------------------------------------------------------
--- Step 1: Account-level objects
--- -----------------------------------------------------------------------------
-USE ROLE ACCOUNTADMIN;
-
-CREATE ROLE IF NOT EXISTS JUNIPER_BUILDER
-  COMMENT = 'Owns the Juniper Valley Health demo and builds its Cortex Sense context';
-CREATE ROLE IF NOT EXISTS JUNIPER_ANALYST
-  COMMENT = 'Juniper Valley Health analyst: reads the ANALYTICS schema only';
-
--- The Cortex Sense builder role. This grant succeeds even if your account isn't
--- enrolled in the Cortex Sense private preview; enrollment is checked only when
--- you build the context.
-GRANT DATABASE ROLE SNOWFLAKE.CORTEX_SENSE_BUILDER TO ROLE JUNIPER_BUILDER;
-
--- The demo roles are granted to you, and deliberately not to SYSADMIN, so that no
--- other role inherits access to the Cortex Sense context.
-SET my_user = CURRENT_USER();
-GRANT ROLE JUNIPER_BUILDER TO USER IDENTIFIER($my_user);
-GRANT ROLE JUNIPER_ANALYST TO USER IDENTIFIER($my_user);
-
-CREATE WAREHOUSE IF NOT EXISTS JUNIPER_WH
-  WAREHOUSE_SIZE = XSMALL
-  AUTO_SUSPEND = 60
-  AUTO_RESUME = TRUE
-  INITIALLY_SUSPENDED = TRUE;
-GRANT USAGE ON WAREHOUSE JUNIPER_WH TO ROLE JUNIPER_BUILDER;
-GRANT USAGE ON WAREHOUSE JUNIPER_WH TO ROLE JUNIPER_ANALYST;
-
-CREATE API INTEGRATION IF NOT EXISTS JUNIPER_GITHUB
-  API_PROVIDER = git_https_api
-  API_ALLOWED_PREFIXES = ('https://github.com/sfc-gh-JCHAEARLEY/sfguide-getting-started-with-cortex-sense.git')
-  ENABLED = TRUE;
-GRANT USAGE ON INTEGRATION JUNIPER_GITHUB TO ROLE JUNIPER_BUILDER;
-
-CREATE DATABASE IF NOT EXISTS JUNIPER_HEALTH;
-GRANT OWNERSHIP ON DATABASE JUNIPER_HEALTH TO ROLE JUNIPER_BUILDER COPY CURRENT GRANTS;
-
-
--- -----------------------------------------------------------------------------
--- Step 2: Schemas and the Git repository
+-- Step 1: Schemas and the Git repository
 -- -----------------------------------------------------------------------------
 USE ROLE JUNIPER_BUILDER;
 USE WAREHOUSE JUNIPER_WH;
@@ -81,7 +40,7 @@ CREATE OR REPLACE GIT REPOSITORY SETUP.QUICKSTART_REPO
 
 
 -- -----------------------------------------------------------------------------
--- Step 3: The analytics warehouse (ANALYTICS)
+-- Step 2: The analytics warehouse (ANALYTICS)
 -- Comments describe grain and column meaning only. Business definitions live in
 -- the KNOWLEDGE schema.
 -- -----------------------------------------------------------------------------
@@ -211,7 +170,7 @@ CREATE OR REPLACE SEMANTIC VIEW ANALYTICS.CLAIMS_SV
 
 
 -- -----------------------------------------------------------------------------
--- Step 4: The knowledge corpus (KNOWLEDGE)
+-- Step 3: The knowledge corpus (KNOWLEDGE)
 -- This is where Juniper Valley Health's definitions live: internal docs, saved
 -- queries, the operations dashboard, and the certified semantic view.
 -- -----------------------------------------------------------------------------
@@ -299,7 +258,7 @@ EXECUTE IMMEDIATE FROM @KNOWLEDGE.KNOWLEDGE_STAGE/query-history/tailwind_rate_by
 
 
 -- -----------------------------------------------------------------------------
--- Step 5: Analyst access
+-- Step 4: Analyst access
 -- JUNIPER_ANALYST can read ANALYTICS, including the semantic view analysts use
 -- today, but nothing in KNOWLEDGE.
 -- -----------------------------------------------------------------------------
@@ -310,14 +269,14 @@ GRANT SELECT ON SEMANTIC VIEW JUNIPER_HEALTH.ANALYTICS.CLAIMS_SV TO ROLE JUNIPER
 
 
 -- -----------------------------------------------------------------------------
--- Step 6: Remove the setup plumbing
+-- Step 5: Remove the setup plumbing
 -- The Git clone includes the answer key, so it doesn't stay in the account.
 -- -----------------------------------------------------------------------------
 DROP SCHEMA IF EXISTS SETUP CASCADE;
 
 
 -- -----------------------------------------------------------------------------
--- Step 7: Check the load. Every row should say PASS.
+-- Step 6: Check the load. Every row should say PASS.
 -- -----------------------------------------------------------------------------
 SELECT check_name, expected, actual, IFF(expected = actual, 'PASS', 'FAIL') AS result
 FROM (
