@@ -34,6 +34,10 @@ CREATE ROLE IF NOT EXISTS JUNIPER_ANALYST
 -- enrollment is checked only when you build the context.
 GRANT DATABASE ROLE SNOWFLAKE.CORTEX_SENSE_BUILDER TO ROLE JUNIPER_BUILDER;
 
+-- Scoring an evaluation run on the Cortex Sense Accuracy tab runs as a task owned by
+-- the builder role, so it needs EXECUTE TASK on the account.
+GRANT EXECUTE TASK ON ACCOUNT TO ROLE JUNIPER_BUILDER;
+
 -- The demo roles go to the quickstart user, and deliberately not to SYSADMIN, so
 -- that no other role inherits access to the Cortex Sense context.
 GRANT ROLE JUNIPER_BUILDER TO USER IDENTIFIER($quickstart_user);
