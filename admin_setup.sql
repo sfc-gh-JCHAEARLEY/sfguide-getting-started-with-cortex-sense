@@ -30,8 +30,8 @@ CREATE ROLE IF NOT EXISTS JUNIPER_ANALYST
   COMMENT = 'Juniper Valley Health analyst: reads the ANALYTICS schema only';
 
 -- The Cortex Sense builder role. Only ACCOUNTADMIN can grant it. The grant succeeds
--- even if your account isn't enrolled in the Cortex Sense private preview;
--- enrollment is checked only when you build the context.
+-- even if Cortex Sense isn't enabled on your account; that's checked only when
+-- you build the context.
 GRANT DATABASE ROLE SNOWFLAKE.CORTEX_SENSE_BUILDER TO ROLE JUNIPER_BUILDER;
 
 -- Scoring an evaluation run on the Cortex Sense Accuracy tab runs as a task owned by

@@ -13,8 +13,9 @@ and with a Cortex Sense context over those sources, and compare the answers.
 
 Everything in this repository is synthetic. No real patient data is used.
 
-> Cortex Sense is in private preview. The setup scripts run in any account, but building
-> the context requires an enrolled account. Contact your account team if yours isn't.
+> Cortex Sense is in public preview. The setup scripts run in any account, but building
+> the context requires Cortex Sense to be enabled on it. Contact your account team if
+> `/sense` isn't available or the build reports that it isn't enabled.
 
 ## Quick start
 
